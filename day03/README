@@ -1,0 +1,8 @@
+This is an interacitive tutorial for [R](https://www.r-project.org/) based on the [learnr](https://cran.rstudio.com/web/packages/learnr/index.html) package. 
+Download the [day03.Rmd]() file and execute the following code. 
+
+```{r}
+install.packages("learnr")
+library(leanr)
+rmarkdown::run("day03.Rmd")
+```
