@@ -285,7 +285,7 @@ subset(chickwts, feed == "soybean")
 ```
 
 ### Exercise
-Compute the mean of chicken weights when soybean is fed. 
+Compute the mean of chick weight when soybean is fed. 
 ```{r ex4h, exercise=TRUE}
 
 ```
@@ -296,7 +296,7 @@ mean(subset(chickwts, feed == "soybean"))
 
 
 ### Exercise
-Find out how many chickens weight more than 200 regardelss of feed type. 
+Find out how many chicks weight more than 200 regardelss of feed type. 
 ```{r ex4i, exercise=TRUE}
 
 ```
