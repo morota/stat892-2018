@@ -233,76 +233,106 @@ x7
 
 ## Statistical analysis
 
-We will learn how to compute basic statistics in R by using the `chickwts` data set. We can learn more about `chickwts` by typing `?chickwts` or `help(chickwts)`.
+We will learn how to compute basic statistics in R by using the `PlantGrowth` data set. We can learn more about `PlantGrowth` by typing `?PlantGrowth` or `help(PlantGrowth)`.
 
 ### Exercise
 
-Open the help page for `chickwts` data set. 
+Open the help page for `PlantGrowth` data set. 
 
 ```{r ex4a, exercise=TRUE}
 
 ```
 
 ```{r ex4a-solution}
-?chickwts
+?PlantGrowth
 ```
 
 ### Data structure 
 
-This is how the chickwts data set looks like.  
+This is how the `PlantGrowth` data set looks like.  
 ```{r ex4b, exercise=TRUE, exercise.eval = TRUE}
-chickwts
+PlantGrowth
 ```
 
 ### Mean
 The `mean` function computes the mean of a vector.
 ```{r ex4c, exercise=TRUE}
-mean(chickwts[,1])
+mean(PlantGrowth[,1])
 ```
 
 ### Variance
 The `var` function computes the sample variance of a vector.
 ```{r ex4d, exercise=TRUE}
-var(chickwts[,1])
+var(PlantGrowth[,1])
 ```
 
 ### Table
 The `table` function computes the frequency.
 ```{r ex4e, exercise=TRUE}
-table(chickwts[,2])
+table(PlantGrowth[,2])
 ```
 
 ### Summary
 The `summary` function computes the summary of each column.
 ```{r ex4f, exercise=TRUE}
-summary(chickwts)
+summary(PlantGrowth)
 ```
 
 ### Subsetting
 Use the `subset` function to select a subset of data. 
 ```{r ex4g, exercise=TRUE}
-subset(chickwts, feed == "soybean")
+subset(PlantGrowth, group == "ctrl")
 ```
 
 ### Exercise
-Compute the mean of chick weight when soybean is fed. 
+Compute the mean of plant growth when under `trt1` condition. 
 ```{r ex4h, exercise=TRUE}
 
 ```
 
 ```{r ex4h-solution}
-mean(subset(chickwts, feed == "soybean"))
+mean(subset(PlantGrowth, group == "trt1")[,1])
 ```
 
 
 ### Exercise
-Find out how many chicks weight more than 200 regardelss of feed type. 
+Find out how many plants produced yields greater than 5 regardelss of group type. 
 ```{r ex4i, exercise=TRUE}
 
 ```
 
 ```{r ex4i-solution}
-dim(subset(chickwts, weight > 200))
+dim(subset(PlantGrowth, weight > 5))
 ```
 
+
+### Covariance
+The `cov` function computes the covariance of two vectors. Covariance between yields under two different treatment conditions is the following. 
+```{r ex4j, exercise=TRUE}
+cov(subset(PlantGrowth, group == "trt1")[,1], subset(PlantGrowth, group == "trt2")[,1]) 
+```
+
+
+### Correlation
+The `cor` function computes the correlation of two vectors. Correlation between yields under two different treatment conditions is the following. 
+```{r ex4m, exercise=TRUE}
+cor(subset(PlantGrowth, group == "trt1")[,1], subset(PlantGrowth, group == "trt2")[,1]) 
+```
+
+
+### Exercise
+What is the correlation between yields of `ctrl` and `trt1`? 
+```{r ex4n, exercise=TRUE}
+
+```
+
+```{r ex4n-solution}
+cor(subset(PlantGrowth, group == "ctrl")[,1], subset(PlantGrowth, group == "trt1")[,1]) 
+```
+
+### Example function
+The `example` function runs an example code in help pages. 
+```{r ex4o, exercise=TRUE}
+example("PlantGrowth")
+```
 
