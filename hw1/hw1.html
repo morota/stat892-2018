@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Gota Morota" />
+
+<meta name="date" content="2017-01-23" />
+
+<title>STAT 892-004 Integrative Data Science for Plant Phenomics</title>
+
+<script src="hw1_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="hw1_files/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="hw1_files/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="hw1_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="hw1_files/navigation-1.1/tabsets.js"></script>
+<script src="hw1_files/navigation-1.1/codefolding.js"></script>
+<link href="hw1_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+<script src="hw1_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+<link href="hw1_files/readthedown-0.1/readthedown.css" rel="stylesheet" />
+<script src="hw1_files/readthedown-0.1/readthedown.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #ffffff; color: #1f1c1b; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #ffffff; color: #a0a0a0; border-right: 1px solid #a0a0a0; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+code > span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code > span.dt { color: #0057ae; } /* DataType */
+code > span.dv { color: #b08000; } /* DecVal */
+code > span.bn { color: #b08000; } /* BaseN */
+code > span.fl { color: #b08000; } /* Float */
+code > span.cn { color: #aa5500; } /* Constant */
+code > span.ch { color: #924c9d; } /* Char */
+code > span.sc { color: #3daee9; } /* SpecialChar */
+code > span.st { color: #bf0303; } /* String */
+code > span.vs { color: #bf0303; } /* VerbatimString */
+code > span.ss { color: #ff5500; } /* SpecialString */
+code > span.im { color: #ff5500; } /* Import */
+code > span.co { color: #898887; } /* Comment */
+code > span.do { color: #607880; } /* Documentation */
+code > span.an { color: #ca60ca; } /* Annotation */
+code > span.cv { color: #0095ff; } /* CommentVar */
+code > span.ot { color: #006e28; } /* Other */
+code > span.fu { color: #644a9b; } /* Function */
+code > span.va { color: #0057ae; } /* Variable */
+code > span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #1f1c1b; } /* Operator */
+code > span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code > span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code > span.pp { color: #006e28; } /* Preprocessor */
+code > span.at { color: #0057ae; } /* Attribute */
+code > span.re { color: #0057ae; } /* RegionMarker */
+code > span.in { color: #b08000; } /* Information */
+code > span.wa { color: #bf0303; } /* Warning */
+code > span.al { color: #bf0303; font-weight: bold; } /* Alert */
+code > span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code > span. { color: #1f1c1b; } /* Normal */
+</style>
+
+
+</head>
+
+<body>
+
+
+<div id="content" data-toggle="wy-nav-shift">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+<nav id="nav-top" role="navigation" aria-label="top navigation">
+    <a role="button" href="#" data-toggle="wy-nav-top"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+</nav>
+
+
+<div id="header">
+<h1 class="title">STAT 892-004 Integrative Data Science for Plant Phenomics</h1>
+<h1 class="subtitle">Homework assignment 1a</h1>
+</div>
+
+
+<div id="table-of-contents">
+    <h2><a href="#content">STAT 892-004 Integrative Data Science for Plant Phenomics</a></h2>
+    <div id="text-table-of-contents">
+      <ul>
+      <li><a href="#due-date">Due date</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#question-1">Question 1</a></li>
+      <li><a href="#question-2">Question 2</a></li>
+      <li><a href="#question-3">Question 3</a></li>
+      <li><a href="#question-4">Question 4</a></li>
+      <li><a href="#question-5">Question 5</a></li>
+      <li><a href="#question-6">Question 6</a></li>
+      <li><a href="#question-7">Question 7</a></li>
+      <li><a href="#question-8">Question 8</a></li>
+      <li><a href="#question-9">Question 9</a></li>
+      <li><a href="#question-10">Question 10</a></li>
+      </ul>
+    </div>
+</div>
+
+<div id="main">
+<div id="due-date" class="section level2">
+<h2>Due date</h2>
+<p>Tuesday, January 30, 5pm</p>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>For this assignment, we are going to use the <code>Orange</code> dataset included in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">datasets</a> package. This data shows the growth of orange trees. Type <code>?Orange</code> to learn more about the dataset. Answer the 10 questions below using the <code>Orange</code> dataset.</p>
+</div>
+<div id="question-1" class="section level2">
+<h2>Question 1</h2>
+<p>Describe the <code>Orange</code> dataset and explain each of column.</p>
+</div>
+<div id="question-2" class="section level2">
+<h2>Question 2</h2>
+<p>How many rows and columns are there in this dataset?</p>
+</div>
+<div id="question-3" class="section level2">
+<h2>Question 3</h2>
+<p>How many different orange trees and age groups are there in the dataset?</p>
+</div>
+<div id="question-4" class="section level2">
+<h2>Question 4</h2>
+<p>What is the mean of circumferences across age groups for all orange trees?</p>
+</div>
+<div id="question-5" class="section level2">
+<h2>Question 5</h2>
+<p>What is the variance of circumferences across age groups for all orange trees?</p>
+</div>
+<div id="question-6" class="section level2">
+<h2>Question 6</h2>
+<p>Compute the covariance between circumferences of Tree 3 and Tree 5 across age groups.</p>
+</div>
+<div id="question-7" class="section level2">
+<h2>Question 7</h2>
+<p>Compute the correlation between circumferences of Tree 3 and Tree 5 across age groups.</p>
+</div>
+<div id="question-8" class="section level2">
+<h2>Question 8</h2>
+<p>Which tree has the lowest correlation of circumferences with Tree 1?</p>
+</div>
+<div id="question-9" class="section level2">
+<h2>Question 9</h2>
+<p>Use the <code>subset</code> function and find out which orange trees has the largest circumference in age group 118.</p>
+</div>
+<div id="question-10" class="section level2">
+<h2>Question 10</h2>
+<p>The <code>plot</code> function generates a figure. Leanrn more about the <code>plot</code> function by typing <code>?plot</code>. The following code plot the growth of orange trees. Interpret the results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nTree &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(Orange<span class="op">$</span>Tree))
+<span class="kw">plot</span>(Orange[, <span class="dv">2</span>], Orange[, <span class="dv">3</span>], <span class="dt">main =</span> <span class="st">&quot;Growth of Orange Trees&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Age&quot;</span>, 
+    <span class="dt">ylab =</span> <span class="st">&quot;Circumference&quot;</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(nTree)[Orange<span class="op">$</span>Tree], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="dv">2</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Orange Trees&quot;</span>, <span class="dt">fill =</span> <span class="kw">rainbow</span>(nTree), <span class="kw">levels</span>(Orange<span class="op">$</span>Tree))</code></pre></div>
+<p><img src="hw1_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+</div>
+</div>
+
+
+</div>
+
+<div id="postamble" data-toggle="wy-nav-shift" class="status">
+<p class="author"><span class="glyphicon glyphicon-user"></span> Gota Morota</p>
+<p class="date"><span class="glyphicon glyphicon-calendar"></span> January 23, 2017</p>
+</div>
+
+
+<script>
+$(document).ready(function () {
+ 	  });
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
