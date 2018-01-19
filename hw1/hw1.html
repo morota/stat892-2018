@@ -164,7 +164,7 @@ $(document).ready(function () {
 </div>
 <div id="question-10" class="section level2">
 <h2>Question 10</h2>
-<p>The <code>plot</code> function generates a figure. Leanrn more about the <code>plot</code> function by typing <code>?plot</code>. The following code plot the growth of orange trees. Interpret the results.</p>
+<p>The <code>plot</code> function generates a figure. Learn more about the <code>plot</code> function by typing <code>?plot</code>. The following code plots the growth of orange trees. Interpret the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nTree &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(Orange<span class="op">$</span>Tree))
 <span class="kw">plot</span>(Orange[, <span class="dv">2</span>], Orange[, <span class="dv">3</span>], <span class="dt">main =</span> <span class="st">&quot;Growth of Orange Trees&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Age&quot;</span>, 
     <span class="dt">ylab =</span> <span class="st">&quot;Circumference&quot;</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(nTree)[Orange<span class="op">$</span>Tree], <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="dv">2</span>)
