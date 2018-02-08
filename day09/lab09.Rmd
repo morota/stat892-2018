@@ -40,7 +40,7 @@ The accession IDs (individual IDs) are included in `.fam` file.
 # accession ID
 fam <-read.table("../data/Genotypes/sativas413.fam", header = FALSE, stringsAsFactors = FALSE)  
 head(fam)
-rownames(W) <- fam$V2 # 413 x 36901
+rownames(W) <- paste0("NSFTV_", fam$V2) # 413 x 36901
 ```
 
 ## Phenotype data
