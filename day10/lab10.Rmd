@@ -1,0 +1,244 @@
+---
+title: "Prediction"
+date: "February 8, 2018"
+author: "Gota Morota"
+output:
+   rmdformats::material:
+      highlight: kate
+      self_contained: no
+      code_folding: hide
+---
+
+
+# Rice data
+Download the Rice Diversity Panel data `RiceDiversity.44K.MSU6.Genotypes_PLINK.zip` from [http://ricediversity.org/data/sets/44kgwas/](http://ricediversity.org/data/sets/44kgwas/). 
+
+## Genotype data
+The genotype data set is provided in the PLINK format. We will use the `read_ped` function from the `BGLR` package to read the PLINK format files into the R environment. 
+```{r eval=FALSE, echo=TRUE}
+# install.packages("BGLR")
+library(BGLR)
+out<- read_ped("../data/Genotypes/sativas413.ped")
+p=out$p
+n=out$n
+out=out$x
+#Recode snp to 0,1,2 format using allele 1
+# 0 --> 0
+# 1 --> 1
+# 2 --> NA
+# 3 --> 2
+out[out==2]=NA
+out[out==3]=2
+W <- matrix(out, nrow=p, ncol=n, byrow=TRUE)
+W <- t(W) 
+dim(W) # # 413 x 36901
+```
+
+## Accession IDs 
+The accession IDs (individual IDs) are included in `.fam` file. 
+```{r eval=FALSE}
+# accession ID
+fam <-read.table("../data/Genotypes/sativas413.fam", header = FALSE, stringsAsFactors = FALSE)  
+head(fam)
+rownames(W) <- fam$V2 # 413 x 36901
+```
+
+## Phenotype data
+We will use the `read.csv` function to read the phenotype file `Aus2013_PSA.csv`. This data set was collected using a high throughput phenomics platform (Lemnatex Scanalyzer 3D). From the images, we quantified the number of plant pixels and have summed these for each plant. This sum we refer to as the projected shoot area (PSA) and use this a measure of shoot growth. PSA recorded over a period of eight days for 359 rice lines. Plants that had abberant growth patterns were removed from this dataset. The data set consists of three independent experiments (Exp), each experiment has 357 lines (NSFTV.ID). In each experiment, a subset of < 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).
+```{r eval=FALSE, echo=TRUE}
+# install.packages("tidyverse")
+library(tidyverse)
+dat=read.csv("../data2/Phenotypes/Aus2013_PSA.csv", header = TRUE, stringsAsFactors = FALSE)
+View(dat)
+dim(dat)
+#Get the mean PSA at each time point
+dat2 <- dat %>%
+  group_by(NSFTV.ID, DayOfImaging) %>%
+  summarise(meanPSA = mean(PSA, na.rm = TRUE), SD = sd(PSA, na.rm = TRUE)) 
+dat2
+```
+
+## Plot of PSA curve
+```{r eval=FALSE, echo=TRUE}
+# Plot
+ggplot(dat2, aes(x=DayOfImaging, y=meanPSA)) + geom_smooth(method="loess") + xlab("Day of Imaging") + ylab("Mean PSA")
+```
+
+## Day == 7
+We will analyze day of imaging equals to 7. 
+```{r, eval=FALSE, echo=TRUE}
+y_d7 <- filter(dat2, DayOfImaging==7)
+y_d7 <- y_d7[match(rownames(W), y_d7$NSFTV.ID),]
+
+na.index <- is.na(y_d7$NSFTV.ID)
+y_d7 <- y_d7[!na.index,] # 361 x 22
+W <- W[!na.index,] # 361 x 36901
+dim(W)
+dim(y_d7)
+table(rownames(W) == y_d7$NSFTV.ID)
+head(rownames(W))
+head(y_d7$NSFTV.ID)
+
+```
+```{r, include=FALSE, eval=FALSE, echo=FALSE}
+y_d7X <- filter(dat, Exp=="E1" & Rep=="1" & DayOfImaging==7)
+filter(y_d7X, NSFTV.ID=="NSFTV_1")
+```
+
+## Day == 8
+```{r, eval=FALSE, echo=TRUE}
+y_d8 <- filter(dat2, DayOfImaging==8)
+y_d8 <- y_d8[match(rownames(W), y_d8$NSFTV.ID),] 
+na.index <- is.na(y_d8$NSFTV.ID)
+y_d8 <- y_d8[!na.index,] # 361 x 4
+table(rownames(W) == y_d8$NSFTV.ID)
+```
+
+## Day == 9
+```{r, eval=FALSE, echo=TRUE}
+y_d9 <- filter(dat2, DayOfImaging==9)
+y_d9 <- y_d9[match(rownames(W), y_d9$NSFTV.ID),]
+na.index <- is.na(y_d9$NSFTV.ID)
+y_d9 <- y_d9[!na.index,] # 361 x 4
+table(rownames(W) == y_d9$NSFTV.ID)
+```
+## Day == 10
+```{r, eval=FALSE, echo=TRUE}
+y_d10 <- filter(dat2, DayOfImaging==10)
+y_d10 <- y_d10[match(rownames(W), y_d10$NSFTV.ID),] 
+na.index <- is.na(y_d10$NSFTV.ID)
+y_d10 <- y_d10[!na.index,] # 361 x 4
+table(rownames(W) == y_d10$NSFTV.ID)
+```
+
+## Day == 11
+```{r, eval=FALSE, echo=TRUE}
+y_d11 <- filter(dat2, DayOfImaging==11)
+y_d11 <- y_d11[match(rownames(W), y_d11$NSFTV.ID),] 
+na.index <- is.na(y_d9$NSFTV.ID)
+y_d11 <- y_d11[!na.index,] # 361 x 4
+table(rownames(W) == y_d11$NSFTV.ID)
+```
+
+
+
+
+## Day == 12
+```{r, eval=FALSE, echo=TRUE}
+y_d12 <- filter(dat2, DayOfImaging==12)
+y_d12 <- y_d12[match(rownames(W), y_d12$NSFTV.ID),] 
+na.index <- is.na(y_d12$NSFTV.ID)
+y_d12 <- y_d12[!na.index,] # 361 x 4
+table(rownames(W) == y_d12$NSFTV.ID)
+```
+
+
+
+
+## Day == 13
+```{r, eval=FALSE, echo=TRUE}
+y_d13 <- filter(dat2, DayOfImaging==13)
+y_d13 <- y_d13[match(rownames(W), y_d13$NSFTV.ID),] 
+na.index <- is.na(y_d13$NSFTV.ID)
+y_d13 <- y_d13[!na.index,] # 361 x 4
+table(rownames(W) == y_d13$NSFTV.ID)
+```
+
+
+
+## Day == 14
+```{r, eval=FALSE, echo=TRUE}
+y_d14 <- filter(dat2, DayOfImaging==14)
+y_d14 <- y_d14[match(rownames(W), y_d14$NSFTV.ID),] 
+na.index <- is.na(y_d14$NSFTV.ID)
+y_d14 <- y_d14[!na.index,] # 361 x 22
+table(rownames(W) == y_d14$NSFTV.ID)
+```
+
+
+
+## Day == 15
+We will analyze day of imaging equals to 15. 
+```{r, eval=FALSE, echo=TRUE}
+y_d15 <- filter(dat2, DayOfImaging==15)
+y_d15 <- y_d15[match(rownames(W), y_d15$NSFTV.ID),] 
+na.index <- is.na(y_d13$NSFTV.ID)
+y_d15 <- y_d15[!na.index,] # 361 x 22
+table(rownames(W) == y_d15$NSFTV.ID)
+```
+
+
+
+## Genotype imputation
+Replace missing marker genotypes with mean values. Then store the marker genotypes in a matrix object `W`. 
+```{r eval=FALSE,  echo=TRUE}
+for (j in 1:ncol(W)){
+  W[,j] <- ifelse(is.na(W[,j]), mean(W[,j], na.rm=TRUE), W[,j])
+}
+```
+
+## Quality control
+Perform a quality control analysis by removing markers with MAF < 0.05. How many markers are removed? 
+```{r eval = FALSE}
+p <- colSums(W) / (2*nrow(W)) # or colMean(X) / 2
+maf <- ifelse(p > 0.5, 1-p, p)
+maf.index <- which(maf < 0.05)
+p2 <- p[maf.index]
+W2 <- W[, -maf.index]  # 361 x 33658 
+```
+
+## G matrix
+Compute the first genomic relationship matrix, `G`, of VanRaden (2008)  using the entire markers. 
+```{r eval=FALSE, echo=TRUE}
+W3 <- scale(W2, center=TRUE, scale = FALSE)
+G <- tcrossprod(W3) / ( 2*sum( p2*(1-p2)) )
+```
+
+
+# Genomic prediction - 1
+An example of 3 fold cross-validation with 3 replicates at Day of Imaging == 7. 
+```{r eval=FALSE, echo=TRUE}
+# install.packages("rrBLUP")
+library(rrBLUP)
+
+y <- y_d7$meanPSA
+
+r2 <- array()
+for (i in 1:3){
+  fold <- 3
+  partition <- sample(1:fold, size=nrow(G), replace = TRUE)
+  r1 <- array()
+  for (j in 1:fold){
+    y.na <- y
+    tst <- which(partition == j)
+    y.na[tst] <- NA
+    fit <- mixed.solve(y=y.na, K=G)
+    r1[j] <- cor(y[tst], fit$u[tst])
+  }
+  r2[i] <- mean(r1)
+}
+mean(r2) 
+```
+
+
+# Genomic prediction - 2
+We will predict Day of Imaging == 8 from Day of Imaging == 7, Day of Imaging == 9 from Day of Imaging == 7, Day of Imaging == 10 from Day of Imaging == 7, and so on. 
+```{r eval=FALSE, echo=TRUE}
+fit_d7 <- mixed.solve(y=y_d7$meanPSA, K=G)
+
+r3 <- c(cor(y_d7$meanPSA, fit_d7$u), cor(y_d8$meanPSA, fit_d7$u), cor(y_d9$meanPSA, fit_d7$u)
+, cor(y_d10$meanPSA, fit_d7$u), cor(y_d11$meanPSA, fit_d7$u), cor(y_d12$meanPSA, fit_d7$u), cor(y_d13$meanPSA, fit_d7$u), cor(y_d14$meanPSA, fit_d7$u), cor(y_d15$meanPSA, fit_d7$u))
+df <- data.frame(r3 = r3, DayOfImaging=7:15)
+ggplot(df, aes(x=DayOfImaging, y=r3)) + geom_point() + xlab("Day of Imaging") + ylab("Prediction accuracy")
+```
+
+
+
+
+
+
+
+
+
+
+
