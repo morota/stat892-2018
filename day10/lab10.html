@@ -253,7 +253,7 @@ y_d15 &lt;-<span class="st"> </span>y_d15[<span class="op">!</span>na.index,] <s
 </div>
 <div id="genotype-imputation" class="section level2">
 <h2>Genotype imputation</h2>
-<p>Replace missing marker genotypes with mean values. Then store the marker genotypes in a matrix object <code>W</code>.</p>
+<p>Replace missing marker genotypes with the mean values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(W)){
   W[,j] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(W[,j]), <span class="kw">mean</span>(W[,j], <span class="dt">na.rm=</span><span class="ot">TRUE</span>), W[,j])
 }</code></pre></div>

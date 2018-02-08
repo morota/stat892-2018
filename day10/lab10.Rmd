@@ -168,7 +168,7 @@ table(rownames(W) == y_d15$NSFTV.ID)
 
 
 ## Genotype imputation
-Replace missing marker genotypes with mean values. Then store the marker genotypes in a matrix object `W`. 
+Replace missing marker genotypes with the mean values.
 ```{r eval=FALSE,  echo=TRUE}
 for (j in 1:ncol(W)){
   W[,j] <- ifelse(is.na(W[,j]), mean(W[,j], na.rm=TRUE), W[,j])
