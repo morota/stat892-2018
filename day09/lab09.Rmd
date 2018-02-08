@@ -44,7 +44,7 @@ rownames(W) <- fam$V2 # 413 x 36901
 ```
 
 ## Phenotype data
-We will use the `read.csv` function to read the phenotype file `Aus2013_PSA.csv`. This data set was collected using a high throughput phenomics platform (Lemnatex Scanalyzer 3D). From the images, we quantified the number of plant pixels and have summed these for each plant. This sum we refer to as the projected shoot area (PSA) and use this a measure of shoot growth. PSA recorded over a period of eight days for 359 rice lines. Plants that had abberant growth patterns were removed from this dataset. The data set consists of three independent experiments (Exp), each experiment has 357 lines (NSFTV.ID). In each experiment, a subset of < 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).
+We will use the `read.csv` function to read the phenotype file `Aus2013_PSA.csv`. This data set was collected using a high throughput phenomics platform (Lemnatec Scanalyzer 3D). From the images, the number of plant pixels was quantified and summed for each plant. This sum is referred as the projected shoot area (PSA), which will be used as a measure of shoot growth. PSA was recorded over a period of eight days for 361 rice lines. Plants that had abberant growth patterns were removed from this dataset. The data set consists of three independent experiments (Exp), each experiment has 357 lines (NSFTV.ID). In each experiment, a subset of < 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).
 ```{r eval=FALSE, echo=TRUE}
 # install.packages("tidyverse")
 library(tidyverse)
@@ -91,9 +91,11 @@ This data set is known to exhibit a subpopulation structure as the panel contain
 ```{r eval=FALSE}
 # PC plots
 gp <-read.csv("http://ricediversity.org/data/sets/44kgwas/RiceDiversity.44K.germplasm.csv", header = TRUE, skip = 1,  stringsAsFactors = FALSE)   # 431 x 12
-gp2 <- gp[match(rownames(y_d7), gp$NSFTV.ID), ] # 361 x 12
-table(rownames(y_d7) == gp2$NSFTV.ID)
+gp$NSFTV.ID <- paste0("NSFTV_", gp$NSFTV.ID)
+gp2 <- gp[match(y_d7$NSFTV.ID, gp$NSFTV.ID), ]
+table(y_d7$NSFTV.ID == gp2$NSFTV.ID)
 
+	
 plot(gp2$PC1, gp2$PC2, xlab="PC1", ylab="PC2", col=c(1:6)[factor(gp2$Sub.population)])
 legend(x="topleft", legend = levels(factor(gp2$Sub.population)), col=c(1:6), pch=1, cex=0.6)
 ```

@@ -156,7 +156,7 @@ fam &lt;-<span class="kw">read.table</span>(<span class="st">&quot;../data/Genot
 </div>
 <div id="phenotype-data" class="section level2">
 <h2>Phenotype data</h2>
-<p>We will use the <code>read.csv</code> function to read the phenotype file <code>Aus2013_PSA.csv</code>. This data set was collected using a high throughput phenomics platform (Lemnatex Scanalyzer 3D). From the images, we quantified the number of plant pixels and have summed these for each plant. This sum we refer to as the projected shoot area (PSA) and use this a measure of shoot growth. PSA recorded over a period of eight days for 359 rice lines. Plants that had abberant growth patterns were removed from this dataset. The data set consists of three independent experiments (Exp), each experiment has 357 lines (NSFTV.ID). In each experiment, a subset of &lt; 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).</p>
+<p>We will use the <code>read.csv</code> function to read the phenotype file <code>Aus2013_PSA.csv</code>. This data set was collected using a high throughput phenomics platform (Lemnatec Scanalyzer 3D). From the images, the number of plant pixels was quantified and summed for each plant. This sum is referred as the projected shoot area (PSA), which will be used as a measure of shoot growth. PSA was recorded over a period of eight days for 361 rice lines. Plants that had abberant growth patterns were removed from this dataset. The data set consists of three independent experiments (Exp), each experiment has 357 lines (NSFTV.ID). In each experiment, a subset of &lt; 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;tidyverse&quot;)</span>
 <span class="kw">library</span>(tidyverse)
 dat=<span class="kw">read.csv</span>(<span class="st">&quot;../data2/Phenotypes/Aus2013_PSA.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
@@ -276,7 +276,7 @@ G &lt;-<span class="st"> </span><span class="kw">tcrossprod</span>(W3) <span cla
 </div>
 <div id="genomic-prediction---1" class="section level1">
 <h1>Genomic prediction - 1</h1>
-<p>An example of 3 fold cross-validation with 3 replicates at Day of Imaging == 7.</p>
+<p>An example of 3 fold cross-validation with 3 replicates on the Day of Imaging == 7.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&quot;rrBLUP&quot;)</span>
 <span class="kw">library</span>(rrBLUP)
 
