@@ -173,8 +173,8 @@ dat2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot</span>
 <span class="kw">ggplot</span>(dat2, <span class="kw">aes</span>(<span class="dt">x=</span>DayOfImaging, <span class="dt">y=</span>meanPSA)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day of Imaging&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Mean PSA&quot;</span>)</code></pre></div>
 </div>
-<div id="day-7" class="section level2">
-<h2>Day == 7</h2>
+<div id="day-of-imaging-7" class="section level2">
+<h2>Day of Imaging 7</h2>
 <p>We will analyze day of imaging equals to 7.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d7 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">7</span>)
 y_d7 &lt;-<span class="st"> </span>y_d7[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d7<span class="op">$</span>NSFTV.ID),]
@@ -188,65 +188,64 @@ W &lt;-<span class="st"> </span>W[<span class="op">!</span>na.index,] <span clas
 <span class="kw">head</span>(<span class="kw">rownames</span>(W))
 <span class="kw">head</span>(y_d7<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-8" class="section level2">
-<h2>Day == 8</h2>
+<div id="day-of-imaging-8" class="section level2">
+<h2>Day of Imaging 8</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d8 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">8</span>)
 y_d8 &lt;-<span class="st"> </span>y_d8[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d8<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d8<span class="op">$</span>NSFTV.ID)
 y_d8 &lt;-<span class="st"> </span>y_d8[<span class="op">!</span>na.index,] <span class="co"># 361 x 4</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d8<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-9" class="section level2">
-<h2>Day == 9</h2>
+<div id="day-of-imaging-9" class="section level2">
+<h2>Day of Imaging 9</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d9 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">9</span>)
 y_d9 &lt;-<span class="st"> </span>y_d9[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d9<span class="op">$</span>NSFTV.ID),]
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d9<span class="op">$</span>NSFTV.ID)
 y_d9 &lt;-<span class="st"> </span>y_d9[<span class="op">!</span>na.index,] <span class="co"># 361 x 4</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d9<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-10" class="section level2">
-<h2>Day == 10</h2>
+<div id="day-of-imaging-10" class="section level2">
+<h2>Day of Imaging 10</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d10 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">10</span>)
 y_d10 &lt;-<span class="st"> </span>y_d10[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d10<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d10<span class="op">$</span>NSFTV.ID)
 y_d10 &lt;-<span class="st"> </span>y_d10[<span class="op">!</span>na.index,] <span class="co"># 361 x 4</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d10<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-11" class="section level2">
-<h2>Day == 11</h2>
+<div id="day-of-imaging-11" class="section level2">
+<h2>Day of Imaging 11</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d11 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">11</span>)
 y_d11 &lt;-<span class="st"> </span>y_d11[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d11<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d9<span class="op">$</span>NSFTV.ID)
 y_d11 &lt;-<span class="st"> </span>y_d11[<span class="op">!</span>na.index,] <span class="co"># 361 x 4</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d11<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-12" class="section level2">
-<h2>Day == 12</h2>
+<div id="day-of-imaging-12" class="section level2">
+<h2>Day of Imaging 12</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d12 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">12</span>)
 y_d12 &lt;-<span class="st"> </span>y_d12[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d12<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d12<span class="op">$</span>NSFTV.ID)
 y_d12 &lt;-<span class="st"> </span>y_d12[<span class="op">!</span>na.index,] <span class="co"># 361 x 4</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d12<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-13" class="section level2">
-<h2>Day == 13</h2>
+<div id="day-of-imaging-13" class="section level2">
+<h2>Day of Imaging 13</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d13 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">13</span>)
 y_d13 &lt;-<span class="st"> </span>y_d13[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d13<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d13<span class="op">$</span>NSFTV.ID)
 y_d13 &lt;-<span class="st"> </span>y_d13[<span class="op">!</span>na.index,] <span class="co"># 361 x 4</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d13<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-14" class="section level2">
-<h2>Day == 14</h2>
+<div id="day-of-imaging-14" class="section level2">
+<h2>Day of Imaging 14</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d14 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">14</span>)
 y_d14 &lt;-<span class="st"> </span>y_d14[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d14<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d14<span class="op">$</span>NSFTV.ID)
 y_d14 &lt;-<span class="st"> </span>y_d14[<span class="op">!</span>na.index,] <span class="co"># 361 x 22</span>
 <span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>y_d14<span class="op">$</span>NSFTV.ID)</code></pre></div>
 </div>
-<div id="day-15" class="section level2">
-<h2>Day == 15</h2>
-<p>We will analyze day of imaging equals to 15.</p>
+<div id="day-of-imaging-15" class="section level2">
+<h2>Day of Imaging 15</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_d15 &lt;-<span class="st"> </span><span class="kw">filter</span>(dat2, DayOfImaging<span class="op">==</span><span class="dv">15</span>)
 y_d15 &lt;-<span class="st"> </span>y_d15[<span class="kw">match</span>(<span class="kw">rownames</span>(W), y_d15<span class="op">$</span>NSFTV.ID),] 
 na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(y_d13<span class="op">$</span>NSFTV.ID)

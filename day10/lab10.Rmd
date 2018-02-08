@@ -64,7 +64,7 @@ dat2
 ggplot(dat2, aes(x=DayOfImaging, y=meanPSA)) + geom_smooth(method="loess") + xlab("Day of Imaging") + ylab("Mean PSA")
 ```
 
-## Day == 7
+## Day of Imaging 7
 We will analyze day of imaging equals to 7. 
 ```{r, eval=FALSE, echo=TRUE}
 y_d7 <- filter(dat2, DayOfImaging==7)
@@ -85,7 +85,7 @@ y_d7X <- filter(dat, Exp=="E1" & Rep=="1" & DayOfImaging==7)
 filter(y_d7X, NSFTV.ID=="NSFTV_1")
 ```
 
-## Day == 8
+## Day of Imaging 8
 ```{r, eval=FALSE, echo=TRUE}
 y_d8 <- filter(dat2, DayOfImaging==8)
 y_d8 <- y_d8[match(rownames(W), y_d8$NSFTV.ID),] 
@@ -94,7 +94,7 @@ y_d8 <- y_d8[!na.index,] # 361 x 4
 table(rownames(W) == y_d8$NSFTV.ID)
 ```
 
-## Day == 9
+## Day of Imaging 9
 ```{r, eval=FALSE, echo=TRUE}
 y_d9 <- filter(dat2, DayOfImaging==9)
 y_d9 <- y_d9[match(rownames(W), y_d9$NSFTV.ID),]
@@ -102,7 +102,7 @@ na.index <- is.na(y_d9$NSFTV.ID)
 y_d9 <- y_d9[!na.index,] # 361 x 4
 table(rownames(W) == y_d9$NSFTV.ID)
 ```
-## Day == 10
+## Day of Imaging 10
 ```{r, eval=FALSE, echo=TRUE}
 y_d10 <- filter(dat2, DayOfImaging==10)
 y_d10 <- y_d10[match(rownames(W), y_d10$NSFTV.ID),] 
@@ -111,7 +111,7 @@ y_d10 <- y_d10[!na.index,] # 361 x 4
 table(rownames(W) == y_d10$NSFTV.ID)
 ```
 
-## Day == 11
+## Day of Imaging 11
 ```{r, eval=FALSE, echo=TRUE}
 y_d11 <- filter(dat2, DayOfImaging==11)
 y_d11 <- y_d11[match(rownames(W), y_d11$NSFTV.ID),] 
@@ -123,7 +123,7 @@ table(rownames(W) == y_d11$NSFTV.ID)
 
 
 
-## Day == 12
+## Day of Imaging 12
 ```{r, eval=FALSE, echo=TRUE}
 y_d12 <- filter(dat2, DayOfImaging==12)
 y_d12 <- y_d12[match(rownames(W), y_d12$NSFTV.ID),] 
@@ -135,7 +135,7 @@ table(rownames(W) == y_d12$NSFTV.ID)
 
 
 
-## Day == 13
+## Day of Imaging 13
 ```{r, eval=FALSE, echo=TRUE}
 y_d13 <- filter(dat2, DayOfImaging==13)
 y_d13 <- y_d13[match(rownames(W), y_d13$NSFTV.ID),] 
@@ -146,7 +146,7 @@ table(rownames(W) == y_d13$NSFTV.ID)
 
 
 
-## Day == 14
+## Day of Imaging 14
 ```{r, eval=FALSE, echo=TRUE}
 y_d14 <- filter(dat2, DayOfImaging==14)
 y_d14 <- y_d14[match(rownames(W), y_d14$NSFTV.ID),] 
@@ -157,8 +157,7 @@ table(rownames(W) == y_d14$NSFTV.ID)
 
 
 
-## Day == 15
-We will analyze day of imaging equals to 15. 
+## Day of Imaging 15
 ```{r, eval=FALSE, echo=TRUE}
 y_d15 <- filter(dat2, DayOfImaging==15)
 y_d15 <- y_d15[match(rownames(W), y_d15$NSFTV.ID),] 
