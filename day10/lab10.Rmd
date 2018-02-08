@@ -65,7 +65,6 @@ ggplot(dat2, aes(x=DayOfImaging, y=meanPSA)) + geom_smooth(method="loess") + xla
 ```
 
 ## Day of Imaging 7
-We will analyze day of imaging equals to 7. 
 ```{r, eval=FALSE, echo=TRUE}
 y_d7 <- filter(dat2, DayOfImaging==7)
 y_d7 <- y_d7[match(rownames(W), y_d7$NSFTV.ID),]
