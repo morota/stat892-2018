@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Malachy Campbell" />
+
+<meta name="date" content="2018-02-20" />
+
+<title>Exercise</title>
+<!-- Material Design fonts -->
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="PhenotypingII_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="PhenotypingII_files/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="PhenotypingII_files/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="PhenotypingII_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="PhenotypingII_files/navigation-1.1/tabsets.js"></script>
+<script src="PhenotypingII_files/navigation-1.1/codefolding.js"></script>
+<link href="PhenotypingII_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+<script src="PhenotypingII_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+<link href="PhenotypingII_files/bootstrap_material-0.1/bootstrap-material-design.min.css" rel="stylesheet" />
+<link href="PhenotypingII_files/bootstrap_material-0.1/ripples.min.css" rel="stylesheet" />
+<script src="PhenotypingII_files/bootstrap_material-0.1/material.min.js"></script>
+<script src="PhenotypingII_files/bootstrap_material-0.1/ripples.min.js"></script>
+<link href="PhenotypingII_files/material-0.1/material.css" rel="stylesheet" />
+<script src="PhenotypingII_files/material-0.1/material.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #ffffff; color: #1f1c1b; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #ffffff; color: #a0a0a0; border-right: 1px solid #a0a0a0; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+code > span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code > span.dt { color: #0057ae; } /* DataType */
+code > span.dv { color: #b08000; } /* DecVal */
+code > span.bn { color: #b08000; } /* BaseN */
+code > span.fl { color: #b08000; } /* Float */
+code > span.cn { color: #aa5500; } /* Constant */
+code > span.ch { color: #924c9d; } /* Char */
+code > span.sc { color: #3daee9; } /* SpecialChar */
+code > span.st { color: #bf0303; } /* String */
+code > span.vs { color: #bf0303; } /* VerbatimString */
+code > span.ss { color: #ff5500; } /* SpecialString */
+code > span.im { color: #ff5500; } /* Import */
+code > span.co { color: #898887; } /* Comment */
+code > span.do { color: #607880; } /* Documentation */
+code > span.an { color: #ca60ca; } /* Annotation */
+code > span.cv { color: #0095ff; } /* CommentVar */
+code > span.ot { color: #006e28; } /* Other */
+code > span.fu { color: #644a9b; } /* Function */
+code > span.va { color: #0057ae; } /* Variable */
+code > span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #1f1c1b; } /* Operator */
+code > span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code > span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code > span.pp { color: #006e28; } /* Preprocessor */
+code > span.at { color: #0057ae; } /* Attribute */
+code > span.re { color: #0057ae; } /* RegionMarker */
+code > span.in { color: #b08000; } /* Information */
+code > span.wa { color: #bf0303; } /* Warning */
+code > span.al { color: #bf0303; font-weight: bold; } /* Alert */
+code > span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code > span. { color: #1f1c1b; } /* Normal */
+</style>
+
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+</head>
+
+<body>
+
+<div class="header-panel shadow z-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-3">
+        <div id="header">
+    <h1 class="title">Exercise</h1>
+                <h4 class="author"><em>Malachy Campbell</em></h4>
+                <h4 class="date"><em>Feb. 20, 2018</em></h4>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<div class="container-fluid main-container">
+    <div class="row">
+      <nav class="col-xs-3 menu" id="toc">
+        <ul>
+        <li><a href="#vitis-dataset">Vitis dataset</a></li>
+        <li><a href="#hyperspectral-imaging-for-assessing-drought-responses-in-maize">Hyperspectral imaging for assessing drought responses in maize</a></li>
+        </ul>
+      </nav>
+     <div class="pages col-xs-9">
+     <div class="row">
+       <div class="col-xs-10">
+
+
+
+<div id="vitis-dataset" class="section level1">
+<h1>Vitis dataset</h1>
+<p>Here, we will bridge the gap between “classical” ampelography (the classification of grapevines based on phenotypic characteristics) and “digital” ampelography. Pierre Galet devised a series of morphological descriptors that could be used to differentiate between wine grape cultivars in the early 1960’s. His efforts transformed ampelography from an art form to a science. However, imaging can be used to increase the throughput and accuracy of ampelography. This dataset was generated by Chitwood et al (2014). I encourage you to check out the paper, as it is an interesting read and combines imaging, genomics, and transcriptomics. The objective of their study was to provide a morphometric analysis of leaf shape for more than 1,200 grape accessions, and provide a genetic basis for these complex traits. The authors used photographs of leaves for a panel of 1,200 grape varieties at the USDA National Clonal Germplasm Repository. The authors used several metrics to describe the leaf shape (circularity, aspect ratio) and used the principle components from generalized Procrustes analysis (GPA) and Elliptical Fourier descriptors. In this dataset you’ll find the digital descriptors, as well as those used by Galet (obtained from the USDA GRIN database).</p>
+<p><a href="http://www.plantphysiol.org/content/164/1/259#def-3">Chitwood et al (2012)</a></p>
+<table>
+<caption>Description of columns in Vitis dataset</caption>
+<thead>
+<tr class="header">
+<th align="left">Source of Trait</th>
+<th align="left">Column Name</th>
+<th align="left">Trait Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Chitwood et al (2014)</td>
+<td align="left">circ</td>
+<td align="left">Circularity</td>
+<td align="left">Ratio of the area to perimeter of an outline</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">ar</td>
+<td align="left">Aspect Ratio</td>
+<td align="left">Ratio of the major axis to the minor axis of a fitted ellipse</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">iPC1</td>
+<td align="left">Inner PC1</td>
+<td align="left">See figure 3B of Chitwood et al</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">iPC2</td>
+<td align="left">Inner PC2</td>
+<td align="left">See figure 3B of Chitwood et al</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">iPC3</td>
+<td align="left">Inner PC3</td>
+<td align="left">See figure 3B of Chitwood et al</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">oPC1</td>
+<td align="left">Outer PC1</td>
+<td align="left">See figure 3A of Chitwood et al</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">oPC2</td>
+<td align="left">Outer PC2</td>
+<td align="left">See figure 3A of Chitwood et al</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">oPC3</td>
+<td align="left">Outer PC3</td>
+<td align="left">See figure 3A of Chitwood et al</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">symPC1</td>
+<td align="left">Symmetric PC1</td>
+<td align="left">See figure 2 of Chitwood et al</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">symPC2</td>
+<td align="left">Symmetric PC2</td>
+<td align="left">See figure 2 of Chitwood et al</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">symPC3</td>
+<td align="left">Symmetric PC3</td>
+<td align="left">See figure 2 of Chitwood et al</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">symPC4</td>
+<td align="left">Symmetric PC4</td>
+<td align="left">See figure 2 of Chitwood et al</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">symPC5</td>
+<td align="left">Symmetric PC5</td>
+<td align="left">See figure 2 of Chitwood et al</td>
+</tr>
+<tr class="even">
+<td align="left">Galet (1952)</td>
+<td align="left">A</td>
+<td align="left">A</td>
+<td align="left">Ratio of the length of superior lateral vein to midrib</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">B</td>
+<td align="left">B</td>
+<td align="left">Ratio of the length of inferior lateral vein to midrib</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">C</td>
+<td align="left">C</td>
+<td align="left">Ratio of the length of petiolar vein to midrib</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">r</td>
+<td align="left">r</td>
+<td align="left">Ratio of the length to width of the leaf</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">Spri</td>
+<td align="left">S’</td>
+<td align="left">Angle between midrib and inferior lateral vein</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">S</td>
+<td align="left">S</td>
+<td align="left">Angle between midrib and petiolar vein</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">lowSup</td>
+<td align="left">SI2/L2</td>
+<td align="left">low estimate of superior lobing</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">lowInf</td>
+<td align="left">SI1/L3</td>
+<td align="left">low estimate of inferior lobing</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">highSup</td>
+<td align="left">SI2/L2</td>
+<td align="left">high estimate of superior lobing</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">highInf</td>
+<td align="left">SI1/L3</td>
+<td align="left">low inferior of superior lobing</td>
+</tr>
+</tbody>
+</table>
+<div id="phenotype-data" class="section level2">
+<h2>Phenotype Data</h2>
+<p>Here we’ll load the phenotype data, and take a look at the first six lines. Each row corresponds to a grapevine accession from the USDA germplasm repository. Although 1200 accesssions were phenotyped by Chitwood et al (2012), only 122 had descriptions using Galet’s method. The first 13 columns are the digital traits, and the last 10 are the classical measurements.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chitwood =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Phenotypes/Chitwood_Galet.csv&quot;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)
+
+<span class="co"># head(chitwood)</span></code></pre></div>
+</div>
+<div id="spearman-correlation-between-digital-and-classical-ampelography-metrics" class="section level2">
+<h2>Spearman correlation between digital and classical ampelography metrics</h2>
+<p>Here, we’ll look at the correlation between digital and classical amelography measurements using Spearman’s Rank correlation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sp.cor =<span class="st"> </span><span class="kw">cor</span>(chitwood[<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>], chitwood[<span class="dv">14</span><span class="op">:</span><span class="dv">23</span>], <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</code></pre></div>
+</div>
+<div id="plot-the-results" class="section level2">
+<h2>Plot the results</h2>
+<p>Now, we’ll plot the results as a nice heatmap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(gplots)</span>
+<span class="kw">library</span>(gplots)
+<span class="kw">heatmap.2</span>(sp.cor, <span class="dt">Rowv =</span> F, <span class="dt">Colv =</span> F, <span class="dt">dendrogram =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">cellnote =</span> <span class="kw">round</span>(sp.cor, 
+    <span class="dv">2</span>), <span class="dt">notecol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">notecex =</span> <span class="fl">0.5</span>, <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">100</span>), 
+    <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="dv">6</span>))</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/hm%20plot-1.png" width="576" /></p>
+</div>
+</div>
+<div id="hyperspectral-imaging-for-assessing-drought-responses-in-maize" class="section level1">
+<h1>Hyperspectral imaging for assessing drought responses in maize</h1>
+<p>The purpose of this exercise is to explore some hyperspectral imaging data, and determine which spectral bands and/or indicies can be used to predict plant water status. Here, we will look at some hyperspectral data collected from some corn plants under control and drought conditions. The plants were imaged over a period of 22 days during the V5 (5 leaf) to V6 (6 leaf) stage at UNL’s Innovation Campus greenhouse. See <a href="https://www.agry.purdue.edu/ext/corn/news/timeless/vstagemethods.html">the Corny News Network</a> for a description of the growth stages of corn. All plants were watered to 80% feild capacity prior to imaging, and a subset of plants were allowed to dry-down to 50% feild capacity throughout the imaging period. On the last total plant water content was measured for X plants (credit: Sajag Adhikari).</p>
+<p>The goal of the exercise is to find the “best” index or hyperspectral band(s) for predicting plant water status. Feel free to try out some other published indicies or some alternative analyses <a href="http://www.ajevonline.org/content/ajev/58/3/302.full.pdf">José R. Rodríguez-Pérez et al (2007) provides an extensive list</a>. Below, you will find a few functions to calculate indices commonly used in hyperspectral studies. I will provide a brief example of how to calculate NDVI for each plant (<span class="math inline">\(NDVI = \frac{R_{800} - R_{640}}{R_{800} + R_{640}}\)</span>) You can modify the code to use your own indices.</p>
+<div id="hyperspectral-data" class="section level2">
+<h2>Hyperspectral data</h2>
+<p>The imaging system provides a stack of 235 greyscale images for each plant. Each image in the stack is a specific wavelength. For each image, we remove the background objects leaving just the “plant pixels”. Each plant pixel will be a single chandanel and the intensity of the channel should be proportional to the reflectance. So, a higher intensity means more reflectance for a given wavelength. For each image we obtain the mean pixel intensity (sum the pixel intensities and divide by the total number of plant pixels). This is equivalent to the mean reflectance for each plant. Here, we will read in the file of the mean pixel intensities for each plant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Phenotypes/Hyperspec_pixel_density.csv&quot;</span>)
+
+<span class="co"># Check the first 10 columns of the phenotypic data head(dat[1:10])</span>
+
+<span class="co"># Plot the refectance for all wavelengths</span>
+dat.means =<span class="st"> </span><span class="kw">apply</span>(dat[<span class="dv">4</span><span class="op">:</span><span class="kw">ncol</span>(dat)], <span class="dv">2</span>, mean)
+<span class="kw">plot</span>(<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">585</span>, <span class="dt">to =</span> <span class="dv">1755</span>, <span class="dt">by =</span> <span class="dv">5</span>), dat.means, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Reflectance&quot;</span>, 
+    <span class="dt">xlab =</span> <span class="st">&quot;Wavelength&quot;</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/load%20data-1.png" width="576" /></p>
+<p>Here, I will calculate the normalized difference vegetation index (NDVI). I will create a new dataframe named ‘NDVI’ that has the NDVI calculations, the plant ID, the treatment, and the day of imaging. I’ll create a plot of NDVI over the six time points (1 - 22 days of imaging).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the data frame</span>
+NDVI.df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> dat<span class="op">$</span>ID, <span class="dt">Treatment =</span> dat<span class="op">$</span>Treatment, <span class="dt">DayOfImaging =</span> dat<span class="op">$</span>DayOfImaging, 
+    <span class="dt">NDVI =</span> <span class="kw">NDVI</span>(dat))
+
+<span class="co"># boxplot(NDVI~Treatment, data=NDVI.df, ylab=&#39;NDVI&#39;)</span>
+
+<span class="co"># Plot results install.packages(&#39;ggplot2&#39;)</span>
+<span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>(NDVI.df, <span class="kw">aes</span>(<span class="dt">x =</span> DayOfImaging, <span class="dt">y =</span> NDVI, <span class="dt">colour =</span> Treatment)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">xlab</span>(<span class="st">&quot;Day of Imaging&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;NDVI&quot;</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/NDVI-1.png" width="576" /></p>
+<p>The indices defined above only capture a small portion of the total phenotype described by the hyperspectral data. Here, we will first utilize the whole hyperspectral range to predict plant water content. This data was collected at 24 days after imaging. For this part of the excersize we will utilize partial least squares regression in the package ‘pls’. Below I will provide a brief explaination of the methodology. For those interested, the ‘pls’ manual provides an in-depth explaination of the PLSR technique, and a few example datasets <a href="https://cran.r-project.org/web/packages/pls/vignettes/pls-manual.pdf">PLS</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;pls&#39;)</span>
+<span class="kw">library</span>(pls)
+<span class="co"># This dataset contains the reflacance values for all the wavelengths. These</span>
+<span class="co"># will be used as predictors for the percent of total biomass that is water</span>
+<span class="co"># (&#39;Percent.Water&#39;).</span>
+dat2 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Phenotypes/Hyperspec_PWC.csv&quot;</span>)
+dat2<span class="op">$</span>ID =<span class="st"> </span><span class="ot">NULL</span>
+dat2<span class="op">$</span>Treatment =<span class="st"> </span><span class="ot">NULL</span>
+dat2<span class="op">$</span>TotalWater =<span class="st"> </span><span class="ot">NULL</span>
+<span class="co"># Make a training set and validation set to assess the prediction accuracy</span>
+<span class="co"># This is similar to what we did for genomic prediction, however here we</span>
+<span class="co"># will only sample the data once.</span>
+traindat &lt;-<span class="st"> </span>dat2[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ]
+testdat &lt;-<span class="st"> </span>dat2[<span class="dv">51</span><span class="op">:</span><span class="dv">87</span>, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we&#39;ll fit the PLSR model. We&#39;re regressing the Percent water on the</span>
+<span class="co"># hyperspectral data (Percent.Water ~ a).</span>
+full.spec &lt;-<span class="st"> </span><span class="kw">plsr</span>(Percent.Water <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> traindat)
+<span class="kw">summary</span>(full.spec)</code></pre></div>
+<pre><code>Data:   X dimension: 50 242 
+    Y dimension: 50 1
+Fit method: kernelpls
+Number of components considered: 49
+TRAINING: % variance explained
+               1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
+X                97.32    98.97    99.26    99.33    99.38    99.43
+               7 comps  8 comps  9 comps  10 comps  11 comps  12 comps
+X                99.50    99.55    99.58     99.61     99.64     99.67
+               13 comps  14 comps  15 comps  16 comps  17 comps  18 comps
+X                 99.70     99.71     99.74     99.76     99.80     99.81
+               19 comps  20 comps  21 comps  22 comps  23 comps  24 comps
+X                 99.82     99.84     99.85     99.87     99.88     99.89
+               25 comps  26 comps  27 comps  28 comps  29 comps  30 comps
+X                  99.9     99.91     99.92     99.92     99.93     99.94
+               31 comps  32 comps  33 comps  34 comps  35 comps  36 comps
+X                 99.94     99.95     99.95     99.96     99.97     99.97
+               37 comps  38 comps  39 comps  40 comps  41 comps  42 comps
+X                 99.97     99.98     99.98     99.98     99.98     99.99
+               43 comps  44 comps  45 comps  46 comps  47 comps  48 comps
+X                 99.99     99.99     99.99       100       100       100
+               49 comps
+X                   100
+ [ reached getOption(&quot;max.print&quot;) -- omitted 1 row ]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">RMSEP</span>(full.spec), <span class="dt">legendpos =</span> <span class="st">&quot;topright&quot;</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/fit%20the%20plsr%20model-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This line shows the how well the model fits our data</span>
+<span class="kw">plot</span>(full.spec, <span class="dt">ncomp =</span> <span class="dv">20</span>, <span class="dt">asp =</span> <span class="dv">1</span>, <span class="dt">line =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/plot%20fit-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we predict the percent water for the testing dataset using the model</span>
+<span class="co"># fit using the training dataset</span>
+Y.tst =<span class="st"> </span><span class="kw">predict</span>(full.spec, <span class="dt">ncomp =</span> <span class="dv">20</span>, <span class="dt">newdata =</span> testdat)</code></pre></div>
+</div>
+<div id="plot-the-results-1" class="section level2">
+<h2>Plot the results</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Y.tst, testdat<span class="op">$</span>Percent.Water, <span class="dt">xlab =</span> <span class="st">&quot;Percent Water Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percent Water Observed&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/plot%20predicted-1.png" width="576" /></p>
+</div>
+<div id="calculate-the-correlation-between-predicted-values-and-observed-values-in-the-data-set" class="section level2">
+<h2>Calculate the correlation between predicted values and observed values in the data set</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(Y.tst, testdat<span class="op">$</span>Percent.Water)</code></pre></div>
+<pre><code>[1] 0.2602748</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sub.hyperspec &lt;-<span class="st"> </span><span class="cf">function</span>(startBW, endBW) {
+    <span class="cf">if</span> (<span class="kw">sum</span>(<span class="kw">colnames</span>(dat2) <span class="op">==</span><span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;bw_&quot;</span>, startBW)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        start.col =<span class="st"> </span><span class="kw">which</span>(<span class="kw">colnames</span>(dat2) <span class="op">==</span><span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;bw_&quot;</span>, startBW))
+    } <span class="cf">else</span> {
+        <span class="kw">print</span>(<span class="st">&quot;Column name for first bandwidth does not exist&quot;</span>)
+    }
+    <span class="cf">if</span> (<span class="kw">sum</span>(<span class="kw">colnames</span>(dat2) <span class="op">==</span><span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;bw_&quot;</span>, endBW)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        end.col =<span class="st"> </span><span class="kw">which</span>(<span class="kw">colnames</span>(dat2) <span class="op">==</span><span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;bw_&quot;</span>, endBW))
+    } <span class="cf">else</span> {
+        <span class="kw">print</span>(<span class="st">&quot;Column name for last bandwidth does not exist&quot;</span>)
+    }
+    tmp.df =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cbind</span>(dat2<span class="op">$</span>Percent.Water, dat2[, start.col<span class="op">:</span>end.col]))
+    <span class="kw">colnames</span>(tmp.df)[<span class="dv">1</span>] =<span class="st"> &quot;Percent.Water&quot;</span>
+    <span class="kw">return</span>(tmp.df)
+}
+
+dat3 =<span class="st"> </span><span class="kw">sub.hyperspec</span>(<span class="dv">585</span>, <span class="dv">605</span>)
+
+traindat2 &lt;-<span class="st"> </span>dat3[<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>, ]
+testdat2 &lt;-<span class="st"> </span>dat3[<span class="dv">51</span><span class="op">:</span><span class="dv">87</span>, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we&#39;ll fit the PLSR model. We&#39;re regressing the Percent water on the</span>
+<span class="co"># hyperspectral data (Percent.Water ~ a).</span>
+full.spec &lt;-<span class="st"> </span><span class="kw">plsr</span>(Percent.Water <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> traindat2)
+<span class="kw">summary</span>(full.spec)</code></pre></div>
+<pre><code>Data:   X dimension: 50 5 
+    Y dimension: 50 1
+Fit method: kernelpls
+Number of components considered: 5
+TRAINING: % variance explained
+               1 comps  2 comps  3 comps  4 comps  5 comps
+X                91.53    94.02    95.49    97.94   100.00
+Percent.Water    18.38    24.36    24.63    24.65    24.65</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">RMSEP</span>(full.spec), <span class="dt">legendpos =</span> <span class="st">&quot;topright&quot;</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/fit2-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(full.spec, <span class="dt">asp =</span> <span class="dv">1</span>, <span class="dt">line =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/plot%20fit2-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(Y.tst, testdat<span class="op">$</span>Percent.Water, <span class="dt">xlab =</span> <span class="st">&quot;Percent Water Predicted&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percent Water Observed&quot;</span>)
+<span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="PhenotypingII_files/figure-html/plot%20predicted%202-1.png" width="576" /></p>
+</div>
+<div id="calculate-the-correlation-between-predicted-values-and-observed-values-in-the-data-set-1" class="section level2">
+<h2>Calculate the correlation between predicted values and observed values in the data set</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(Y.tst, testdat<span class="op">$</span>Percent.Water)</code></pre></div>
+<pre><code>[1] 0.2602748</code></pre>
+</div>
+</div>
+
+    </div>
+    <div class="col-xs-2">
+        </div>
+  </div>
+  </div>
+  </div>
+  <div class="row">
+    </div>
+  </div>
+
+<script>
+$(document).ready(function () {
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-striped table-hover');
+
+    var images = $('.pages img');
+  images.filter(function() {
+      if ($(this).parent().attr("class") == "figure") {
+          return(false)
+      } else {
+          return(true);
+      }
+  }).wrap("<div class='figure'></div>");
+  images.addClass("image-thumb").wrap("<div class='panel-body'></div>");
+  $('.figure p.caption').wrap("<div class='panel-footer'></div>");
+  $('.figure').addClass('panel panel-default');
+  
+    $('.pages img')
+ 	  .addClass("image-lb");
+  $('.pages').magnificPopup({
+	      type:'image',
+	      closeOnContentClick: false,
+	      delegate: 'img',
+	      gallery: {enabled: false },
+          removalDelay: 500,
+          callbacks: {
+              beforeOpen: function() {
+                // just a hack that adds mfp-anim class to markup
+                this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+              }
+          },
+          mainClass: 'mfp-move-from-top',
+	      image: {
+	        verticalFit: true,
+            titleSrc: 'alt'
+	      }
+ 	    });
+ 	
+    window.page = window.location.hash;
+    if (window.page != "") {
+      $(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+    }
+
+    /* init material bootstrap js */
+    $.material.init();
+});
+</script>
+
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
