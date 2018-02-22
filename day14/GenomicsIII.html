@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Malachy Campbell" />
+
+<meta name="date" content="2018-02-22" />
+
+<title>Genomics III</title>
+
+<script src="GenomicsIII_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="GenomicsIII_files/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="GenomicsIII_files/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="GenomicsIII_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="GenomicsIII_files/navigation-1.1/tabsets.js"></script>
+<script src="GenomicsIII_files/navigation-1.1/codefolding.js"></script>
+<link href="GenomicsIII_files/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+<script src="GenomicsIII_files/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+<link href="GenomicsIII_files/clean-0.1/clean.css" rel="stylesheet" />
+<script src="GenomicsIII_files/clean-0.1/clean.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #ffffff; color: #1f1c1b; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #ffffff; color: #a0a0a0; border-right: 1px solid #a0a0a0; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #1f1c1b; background-color: #ffffff; }
+code > span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code > span.dt { color: #0057ae; } /* DataType */
+code > span.dv { color: #b08000; } /* DecVal */
+code > span.bn { color: #b08000; } /* BaseN */
+code > span.fl { color: #b08000; } /* Float */
+code > span.cn { color: #aa5500; } /* Constant */
+code > span.ch { color: #924c9d; } /* Char */
+code > span.sc { color: #3daee9; } /* SpecialChar */
+code > span.st { color: #bf0303; } /* String */
+code > span.vs { color: #bf0303; } /* VerbatimString */
+code > span.ss { color: #ff5500; } /* SpecialString */
+code > span.im { color: #ff5500; } /* Import */
+code > span.co { color: #898887; } /* Comment */
+code > span.do { color: #607880; } /* Documentation */
+code > span.an { color: #ca60ca; } /* Annotation */
+code > span.cv { color: #0095ff; } /* CommentVar */
+code > span.ot { color: #006e28; } /* Other */
+code > span.fu { color: #644a9b; } /* Function */
+code > span.va { color: #0057ae; } /* Variable */
+code > span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #1f1c1b; } /* Operator */
+code > span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code > span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code > span.pp { color: #006e28; } /* Preprocessor */
+code > span.at { color: #0057ae; } /* Attribute */
+code > span.re { color: #0057ae; } /* RegionMarker */
+code > span.in { color: #b08000; } /* Information */
+code > span.wa { color: #bf0303; } /* Warning */
+code > span.al { color: #bf0303; font-weight: bold; } /* Alert */
+code > span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code > span. { color: #1f1c1b; } /* Normal */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+<div class="container-fluid main-container">
+  <div class="row">
+     <div class="col-md-10">
+
+
+
+
+<div id="header">
+<h1 class="title">Genomics III</h1>
+<h4 class="author"><em>Malachy Campbell</em></h4>
+<h4 class="date"><em>Feb. 22, 2018</em></h4>
+</div>
+
+<div id="content">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;~/Desktop/GenomicsIII/&quot;</span>)
+<span class="co"># install.packages(&#39;plyr&#39;) install.packages(&#39;reshape2&#39;)</span>
+<span class="co"># install.packages(&#39;minpack.lm&#39;)</span>
+<span class="kw">library</span>(plyr)
+<span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(minpack.lm)</code></pre></div>
+<div id="growth-modeling-exponential-function" class="section level1">
+<h1>Growth modeling: Exponential function</h1>
+<p>Today we will be using the same dataset that was used for the first two genomics exercises (<code>Aus2013_PSA.csv</code>). This data set was collected using a greenhouse phenomics platform (Lemnatec Scanalyzer 3D). Shoot biomass was quantified over a period of nine days from RGB images. The number of plant pixels were summed from three images (two side view images and one top view) these for each plant. This metric is referred to as projected shoot area (PSA). The data set consists of three independent experiments (Exp), each experiment has 361 lines (NSFTV.ID). In each experiment, a subset of &lt; 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).</p>
+<div id="phenotypic-data" class="section level3">
+<h3>Phenotypic data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PSA =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Phenotypes/Aus2013_PSA.csv&quot;</span>)
+PSA.pop.mn =<span class="st"> </span><span class="kw">ddply</span>(PSA, .(DayOfImaging), summarise, <span class="dt">PSA =</span> <span class="kw">mean</span>(PSA, <span class="dt">na.rm =</span> T))
+PSA =<span class="st"> </span><span class="kw">ddply</span>(PSA, .(DayOfImaging, NSFTV.ID), summarise, <span class="dt">PSA =</span> <span class="kw">mean</span>(PSA, <span class="dt">na.rm =</span> T))
+PSA =<span class="st"> </span><span class="kw">dcast</span>(PSA, DayOfImaging <span class="op">~</span><span class="st"> </span>NSFTV.ID, <span class="dt">value.var =</span> <span class="st">&quot;PSA&quot;</span>)  <span class="co">#9 x 361</span>
+
+PSA<span class="op">$</span>DayOfImaging =<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+</div>
+<div id="defining-the-exponential-growth-model" class="section level3">
+<h3>Defining the exponential growth model</h3>
+<p>We will model PSA over the nine time points using the exponential function <span class="math inline">\(PSA = M_o e^{rt}\)</span>. Here, <span class="math inline">\(M_o\)</span> is the biomass on the first day of imaging, <span class="math inline">\(t\)</span> is time, and <span class="math inline">\(r\)</span> is a parameter that influences growth rate. Here we will just define the formula we will use to fit exponential growth model with nonlinear least squares using the <code>nlsLM</code> function in the package <code>minpack.lm</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fmla.exp =<span class="st"> </span>Y <span class="op">~</span><span class="st"> </span>M0 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(r <span class="op">*</span><span class="st"> </span>Day)</code></pre></div>
+</div>
+<div id="the-fitting-function" class="section level3">
+<h3>The fitting function</h3>
+<p>This next function does all the heavy lifting. I’ll provide a breif summary of what the function does. See the comments in the code for a line-by-line explaination of what its actually doing. The ‘nlsLM’ function fits the exponential function defined by ‘fmla.exp’ and estimates the model parameters using an iterative method that minimizes the sum of squares of errors between the observed data and the model’s predictions. The model parameters are updated with each iteration until optimal values are obtained. For this to work, we need to supply reasonable starting values. Here the goal is to obtain the “best” estimates for <span class="math inline">\(M_o\)</span> and <span class="math inline">\(r\)</span> for each accession, so for each accession we will need to find some good staring values. For <span class="math inline">\(M_o\)</span>, this is easy. <span class="math inline">\(M_o\)</span> is the starting biomass, so we can just find the minimum value of PSA for each accession. For <span class="math inline">\(r\)</span>, finding good starting values requires a little more work….</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.exp &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+    <span class="co"># For each column of PSA, we will make a new dataframe that has a column</span>
+    <span class="co"># called Day and one called Y. Y is the PSA</span>
+    tmp.df =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Day =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">Y =</span> x)
+    <span class="co"># Here is where we find a good starting value for our model parameter r. If</span>
+    <span class="co"># we log tranform PSA, we can fit a linear model and the slope will be a</span>
+    <span class="co"># great starting value for r. The line below pull out the slope with</span>
+    <span class="co"># coef()[2]</span>
+    r.int =<span class="st"> </span><span class="kw">coef</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Y) <span class="op">~</span><span class="st"> </span>Day, tmp.df))[<span class="dv">2</span>]
+    <span class="co"># Find a starting value for Mo</span>
+    M0.int =<span class="st"> </span><span class="kw">min</span>(tmp.df<span class="op">$</span>Y)
+    
+    <span class="co"># Here is where we fit the non-linear model. With the nlsLM function you can</span>
+    <span class="co"># constrain parameters using the lower and upper arguments.</span>
+    mod.nlsLM =<span class="st"> </span><span class="kw">nlsLM</span>(fmla.exp, <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">M0 =</span> M0.int, <span class="dt">r =</span> r.int), <span class="dt">data =</span> tmp.df, 
+        <span class="dt">control =</span> <span class="kw">nls.lm.control</span>(<span class="dt">maxiter =</span> <span class="dv">1000</span>), <span class="dt">lower =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">upper =</span> <span class="kw">c</span>(<span class="dv">50000</span>, 
+            <span class="ot">Inf</span>))
+    <span class="co"># Obtain the parameter estimates</span>
+    Res =<span class="st"> </span><span class="kw">coefficients</span>(mod.nlsLM)
+    <span class="kw">return</span>(Res)
+}</code></pre></div>
+</div>
+<div id="modeling-the-mean-growth-curve" class="section level3">
+<h3>Modeling the mean growth curve</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop.exp =<span class="st"> </span><span class="kw">fit.exp</span>(PSA.pop.mn<span class="op">$</span>PSA)
+pop.exp</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, PSA.pop.mn<span class="op">$</span>PSA, <span class="dt">ylab =</span> <span class="st">&quot;PSA (pixels)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Day of Imaging&quot;</span>)
+<span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, pop.exp[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(pop.exp[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="applying-the-fitting-function-for-each-accession" class="section level3">
+<h3>Applying the fitting function for each accession</h3>
+<p>Now we’ll apply the function described above to each column of PSA. Remember each column is a different accession.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PSA.exp =<span class="st"> </span><span class="kw">apply</span>(PSA, <span class="dv">2</span>, fit.exp)
+PSA.exp =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">NSFTV.ID =</span> <span class="kw">colnames</span>(PSA.exp), <span class="dt">M0 =</span> PSA.exp[<span class="dv">1</span>, ], <span class="dt">r =</span> PSA.exp[<span class="dv">2</span>, 
+    ])
+<span class="kw">dim</span>(PSA.exp)  <span class="co">#361 x 3</span></code></pre></div>
+</div>
+</div>
+<div id="gwas-for-model-parameters" class="section level1">
+<h1>GWAS for model parameters</h1>
+<p>These model parameters can be thougth of as dervied traits that describe some aspect of the longitudinal phenotype. Recall the exponential function, <span class="math inline">\(PSA = M_o e^{rt}\)</span>, has parameters <span class="math inline">\(M_o\)</span> and <span class="math inline">\(r\)</span> which describe the initial biomass and the growth rate, respectively. If we are interested in finding out which genes influence seedling shoot biomass, we can run a GWAS on the model parameter <span class="math inline">\(M_o\)</span>. Here, we’ll use the code from the Genomics I exercise (this code is copied directly from the exercise) to find SNPs that may influence the shoot biomass of the seedlings (<span class="math inline">\(M_o\)</span>) and the shoot growth rate (<span class="math inline">\(r\)</span>).</p>
+<div id="genotypic-data" class="section level3">
+<h3>Genotypic data</h3>
+<p>The genotype data set is provided in the PLINK format. We will use the <code>read_ped</code> function from the <code>BGLR</code> package to read the PLINK format files into the R environment.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;BGLR&#39;)</span>
+<span class="kw">library</span>(BGLR)
+out &lt;-<span class="st"> </span><span class="kw">read_ped</span>(<span class="st">&quot;RiceDiversity_44K_Genotypes_PLINK/sativas413.ped&quot;</span>)
+p =<span class="st"> </span>out<span class="op">$</span>p
+n =<span class="st"> </span>out<span class="op">$</span>n
+out =<span class="st"> </span>out<span class="op">$</span>x
+<span class="co"># Recode snp to 0,1,2 format using allele 1 0 --&gt; 0 1 --&gt; 1 2 --&gt; NA 3 --&gt; 2</span>
+out[out <span class="op">==</span><span class="st"> </span><span class="dv">2</span>] =<span class="st"> </span><span class="ot">NA</span>
+out[out <span class="op">==</span><span class="st"> </span><span class="dv">3</span>] =<span class="st"> </span><span class="dv">2</span>
+W &lt;-<span class="st"> </span><span class="kw">matrix</span>(out, <span class="dt">nrow =</span> p, <span class="dt">ncol =</span> n, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+W &lt;-<span class="st"> </span><span class="kw">t</span>(W)
+<span class="kw">dim</span>(W)  <span class="co"># # 413 x 36901</span></code></pre></div>
+</div>
+<div id="accession-ids" class="section level3">
+<h3>Accession IDs</h3>
+<p>The accession IDs (individual IDs) are included in <code>.fam</code> file.</p>
+</div>
+<div id="subset-the-marker-matrix" class="section level3">
+<h3>Subset the marker matrix</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PSA.exp &lt;-<span class="st"> </span>PSA.exp[<span class="kw">match</span>(<span class="kw">rownames</span>(W), PSA.exp<span class="op">$</span>NSFTV.ID), ]
+na.index &lt;-<span class="st"> </span><span class="kw">is.na</span>(PSA.exp<span class="op">$</span>NSFTV.ID)
+PSA.exp &lt;-<span class="st"> </span>PSA.exp[<span class="op">!</span>na.index, ]  <span class="co"># 361 x 3</span>
+W &lt;-<span class="st"> </span>W[<span class="op">!</span>na.index, ]  <span class="co"># 361 x 36901</span>
+<span class="kw">dim</span>(W)
+<span class="kw">dim</span>(PSA.exp)
+<span class="kw">table</span>(<span class="kw">rownames</span>(W) <span class="op">==</span><span class="st"> </span>PSA.exp<span class="op">$</span>NSFTV.ID)
+<span class="kw">head</span>(<span class="kw">rownames</span>(W))
+<span class="kw">head</span>(PSA.exp<span class="op">$</span>NSFTV.ID)</code></pre></div>
+</div>
+<div id="genotype-imputation" class="section level3">
+<h3>Genotype imputation</h3>
+<p>Replace missing marker genotypes with the mean values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(W)) {
+    W[, j] &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(W[, j]), <span class="kw">mean</span>(W[, j], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), W[, j])
+}</code></pre></div>
+</div>
+<div id="quality-control" class="section level3">
+<h3>Quality control</h3>
+<p>Perform a quality control analysis by removing markers with MAF &lt; 0.05. How many markers are removed?</p>
+</div>
+<div id="gwas-for-m_o" class="section level2">
+<h2>GWAS for <span class="math inline">\(M_o\)</span></h2>
+<p>Fit a single-marker-based linear mixed model by using the <code>GWAS</code> function in the <a href="https://cran.r-project.org/web/packages/rrBLUP/index.html">rrBLUP</a> R package. Report the -log10 of p-values for SNP effects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;rrBLUP&#39;)</span>
+<span class="kw">library</span>(rrBLUP)
+map &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;RiceDiversity_44K_Genotypes_PLINK/sativas413.map&quot;</span>, <span class="dt">header =</span> <span class="ot">FALSE</span>, 
+    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+my.geno &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">marker =</span> map[, <span class="dv">2</span>], <span class="dt">chrom =</span> map[, <span class="dv">1</span>], <span class="dt">pos =</span> map[, <span class="dv">4</span>], <span class="kw">t</span>(W <span class="op">-</span><span class="st"> </span>
+<span class="st">    </span><span class="dv">1</span>), <span class="dt">check.names =</span> <span class="ot">FALSE</span>)  <span class="co"># W = \in{-1, 0, 1}</span>
+my.pheno &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">NSFTV_ID =</span> PSA.exp<span class="op">$</span>NSFTV.ID, <span class="dt">y =</span> PSA.exp<span class="op">$</span>M0)  <span class="co"># Day 7</span>
+
+rel_M0 &lt;-<span class="st"> </span><span class="kw">GWAS</span>(my.pheno, my.geno, <span class="dt">min.MAF =</span> <span class="fl">0.05</span>, <span class="dt">P3D =</span> <span class="ot">TRUE</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>)
+<span class="kw">head</span>(rel_M0)
+<span class="kw">tail</span>(rel_M0)</code></pre></div>
+<div id="manhattan-plot-for-m_0" class="section level3">
+<h3>Manhattan plot for <span class="math inline">\(M_0\)</span></h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;qqman&#39;)</span>
+<span class="kw">library</span>(qqman)
+<span class="kw">manhattan</span>(<span class="dt">x =</span> rel_M0, <span class="dt">chr =</span> <span class="st">&quot;chrom&quot;</span>, <span class="dt">bp =</span> <span class="st">&quot;pos&quot;</span>, <span class="dt">p =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">snp =</span> <span class="st">&quot;marker&quot;</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;blue4&quot;</span>, 
+    <span class="st">&quot;orange3&quot;</span>), <span class="dt">logp =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</div>
+</div>
+<div id="gwas-for-r" class="section level2">
+<h2>GWAS for <span class="math inline">\(r\)</span></h2>
+<p>Fit a single-marker-based linear mixed model by using the <code>GWAS</code> function in the <a href="https://cran.r-project.org/web/packages/rrBLUP/index.html">rrBLUP</a> R package. Report the -log10 of p-values for SNP effects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.pheno &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">NSFTV_ID =</span> PSA.exp<span class="op">$</span>NSFTV.ID, <span class="dt">y =</span> PSA.exp<span class="op">$</span>r)  <span class="co"># Day 7</span>
+
+rel_r &lt;-<span class="st"> </span><span class="kw">GWAS</span>(my.pheno, my.geno, <span class="dt">min.MAF =</span> <span class="fl">0.05</span>, <span class="dt">P3D =</span> <span class="ot">TRUE</span>, <span class="dt">plot =</span> <span class="ot">FALSE</span>)
+<span class="kw">head</span>(rel_r)
+<span class="kw">tail</span>(rel_r)</code></pre></div>
+<div id="manhattan-plot-for-r" class="section level3">
+<h3>Manhattan plot for <span class="math inline">\(r\)</span></h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">manhattan</span>(<span class="dt">x =</span> rel_r, <span class="dt">chr =</span> <span class="st">&quot;chrom&quot;</span>, <span class="dt">bp =</span> <span class="st">&quot;pos&quot;</span>, <span class="dt">p =</span> <span class="st">&quot;y&quot;</span>, <span class="dt">snp =</span> <span class="st">&quot;marker&quot;</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;blue4&quot;</span>, 
+    <span class="st">&quot;orange3&quot;</span>), <span class="dt">logp =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</div>
+</div>
+</div>
+<div id="genomic-prediction-for-model-parameters" class="section level1">
+<h1>Genomic prediction for model parameters</h1>
+<p>If we are interested in selecting lines that may be the best to improve growth rate or early vigor, we apply the rrBLUP approach we covered in Genomics II to predict the genetic values for <span class="math inline">\(r\)</span> for each accession. Here, we’ll use the code from the Genomics II (this code is copied directly from the exercise) exercise to for <span class="math inline">\(M_o\)</span> and <span class="math inline">\(r\)</span>.</p>
+<div id="compute-the-genomic-relationship-matrix-grm" class="section level3">
+<h3>Compute the genomic relationship matrix (GRM)</h3>
+<p>Compute the first genomic relationship matrix, <code>G</code>, of VanRaden (2008) using the entire markers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">W3 &lt;-<span class="st"> </span><span class="kw">scale</span>(W2, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">FALSE</span>)
+G &lt;-<span class="st"> </span><span class="kw">tcrossprod</span>(W3)<span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(p2 <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p2)))</code></pre></div>
+</div>
+<div id="genomic-prediction-for-m_o" class="section level2">
+<h2>Genomic prediction for <span class="math inline">\(M_o\)</span></h2>
+<p>An example of 3 fold cross-validation with 3 replicates for <span class="math inline">\(M_o\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;rrBLUP&#39;)</span>
+<span class="kw">library</span>(rrBLUP)
+
+y &lt;-<span class="st"> </span>PSA.exp<span class="op">$</span>M0
+
+r2 &lt;-<span class="st"> </span><span class="kw">array</span>()
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {
+    fold &lt;-<span class="st"> </span><span class="dv">3</span>
+    partition &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>fold, <span class="dt">size =</span> <span class="kw">nrow</span>(G), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    r1 &lt;-<span class="st"> </span><span class="kw">array</span>()
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>fold) {
+        y.na &lt;-<span class="st"> </span>y
+        tst &lt;-<span class="st"> </span><span class="kw">which</span>(partition <span class="op">==</span><span class="st"> </span>j)
+        y.na[tst] &lt;-<span class="st"> </span><span class="ot">NA</span>
+        fit &lt;-<span class="st"> </span><span class="kw">mixed.solve</span>(<span class="dt">y =</span> y.na, <span class="dt">K =</span> G)
+        r1[j] &lt;-<span class="st"> </span><span class="kw">cor</span>(y[tst], fit<span class="op">$</span>u[tst])
+    }
+    r2[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(r1)
+}
+<span class="kw">mean</span>(r2)</code></pre></div>
+</div>
+<div id="genomic-prediction-for-r" class="section level2">
+<h2>Genomic prediction for <span class="math inline">\(r\)</span></h2>
+<p>An example of 3 fold cross-validation with 3 replicates for <span class="math inline">\(r\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;rrBLUP&#39;)</span>
+<span class="kw">library</span>(rrBLUP)
+
+y &lt;-<span class="st"> </span>PSA.exp<span class="op">$</span>r
+
+r2 &lt;-<span class="st"> </span><span class="kw">array</span>()
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {
+    fold &lt;-<span class="st"> </span><span class="dv">3</span>
+    partition &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>fold, <span class="dt">size =</span> <span class="kw">nrow</span>(G), <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+    r1 &lt;-<span class="st"> </span><span class="kw">array</span>()
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>fold) {
+        y.na &lt;-<span class="st"> </span>y
+        tst &lt;-<span class="st"> </span><span class="kw">which</span>(partition <span class="op">==</span><span class="st"> </span>j)
+        y.na[tst] &lt;-<span class="st"> </span><span class="ot">NA</span>
+        fit &lt;-<span class="st"> </span><span class="kw">mixed.solve</span>(<span class="dt">y =</span> y.na, <span class="dt">K =</span> G)
+        r1[j] &lt;-<span class="st"> </span><span class="kw">cor</span>(y[tst], fit<span class="op">$</span>u[tst])
+    }
+    r2[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(r1)
+}
+<span class="kw">mean</span>(r2)</code></pre></div>
+</div>
+<div id="selecting-the-lines-with-the-fastest-growth-rate" class="section level2">
+<h2>Selecting the lines with the fastest growth rate</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find top and bottom 3 for r</span>
+top3 =<span class="st"> </span>fit<span class="op">$</span>u[<span class="kw">order</span>(fit<span class="op">$</span>u, <span class="dt">decreasing =</span> T)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]]
+bottom3 =<span class="st"> </span>fit<span class="op">$</span>u[<span class="kw">order</span>(fit<span class="op">$</span>u, <span class="dt">decreasing =</span> T)[<span class="dv">359</span><span class="op">:</span><span class="dv">361</span>]]
+
+<span class="co"># Get their PSA values</span>
+PSA.sub =<span class="st"> </span>PSA[, <span class="kw">colnames</span>(PSA) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">names</span>(top3), <span class="kw">names</span>(bottom3))]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Color palette</span>
+cbPalette &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#999999&quot;</span>, <span class="st">&quot;#E69F00&quot;</span>, <span class="st">&quot;#56B4E9&quot;</span>, <span class="st">&quot;#009E73&quot;</span>, <span class="st">&quot;#F0E442&quot;</span>, <span class="st">&quot;#0072B2&quot;</span>, 
+    <span class="st">&quot;#D55E00&quot;</span>, <span class="st">&quot;#CC79A7&quot;</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(PSA.sub)) {
+    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {
+        <span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, PSA.sub[, i], <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(PSA.sub), <span class="kw">max</span>(PSA.sub)), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, 
+            <span class="dt">col =</span> cbPalette[i], <span class="dt">ylab =</span> <span class="st">&quot;PSA (pixels)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Day of Imaging&quot;</span>)
+    } <span class="cf">else</span> {
+        <span class="kw">lines</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, PSA.sub[, i], <span class="dt">col =</span> cbPalette[i])
+    }
+}
+
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">names</span>(PSA.sub), <span class="dt">lty =</span> <span class="dv">1</span>, <span class="dt">col =</span> cbPalette[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>])</code></pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+    <div class="col-md-2">
+      <div id="toc">
+      	<button type="button" class="close">×</button>
+        <ul>
+        <li><a href="#growth-modeling-exponential-function">Growth modeling: Exponential function</a></li>
+        <li><a href="#gwas-for-model-parameters">GWAS for model parameters</a><ul>
+        <li><a href="#gwas-for-m_o">GWAS for <span class="math inline">\(M_o\)</span></a></li>
+        <li><a href="#gwas-for-r">GWAS for <span class="math inline">\(r\)</span></a></li>
+        </ul></li>
+        <li><a href="#genomic-prediction-for-model-parameters">Genomic prediction for model parameters</a><ul>
+        <li><a href="#genomic-prediction-for-m_o">Genomic prediction for <span class="math inline">\(M_o\)</span></a></li>
+        <li><a href="#genomic-prediction-for-r">Genomic prediction for <span class="math inline">\(r\)</span></a></li>
+        <li><a href="#selecting-the-lines-with-the-fastest-growth-rate">Selecting the lines with the fastest growth rate</a></li>
+        </ul></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+});
+</script>
+
+<script>
+$(document).ready(function () {
+ 	 	$('#content img')
+ 	  .addClass("image-thumb");
+      $('#content img')
+ 	  .addClass("image-lb");
+  $('#content').magnificPopup({
+	      type:'image',
+	      closeOnContentClick: false,
+	      delegate: 'img',
+	      gallery: {enabled: false },
+	      image: {
+	        verticalFit: true,
+          titleSrc: 'alt'
+	      }
+ 	    });
+ 	});
+</script>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

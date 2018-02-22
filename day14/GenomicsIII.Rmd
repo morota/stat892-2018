@@ -1,0 +1,287 @@
+---
+title: "Genomics III"
+author: "Malachy Campbell"
+date: "Feb. 22, 2018"
+output:
+  rmdformats::html_clean:
+    highlight: kate
+    self_contained: no
+---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+```{r load packages, eval=F, echo = T}
+setwd("~/Desktop/GenomicsIII/")
+#install.packages("plyr")
+#install.packages("reshape2")
+#install.packages("minpack.lm")
+library(plyr)
+library(reshape2)
+library(minpack.lm)
+```
+
+#Growth modeling: Exponential function
+Today we will be using the same dataset that was used for the first two genomics exercises (`Aus2013_PSA.csv`). This data set was collected using a greenhouse phenomics platform (Lemnatec Scanalyzer 3D). Shoot biomass was quantified over a period of nine days from RGB images. The number of plant pixels were summed from three images (two side view images and one top view) these for each plant. This metric is referred to as projected shoot area (PSA). The data set consists of three independent experiments (Exp), each experiment has 361 lines (NSFTV.ID). In each experiment, a subset of < 100 lines were randomly selected and replicated twice (Rep). Thus, for the three experiments there will be some lines that have six replicates. The plants were randomly assigned to positions on the conveyor belts in two smart houses (credit: Malachy Campbell).
+
+###Phenotypic data
+```{r load data2, eval=F, echo = T}
+PSA = read.csv("Phenotypes/Aus2013_PSA.csv")
+PSA.pop.mn = ddply(PSA, .(DayOfImaging), summarise, PSA=mean(PSA, na.rm=T))
+PSA = ddply(PSA, .(DayOfImaging, NSFTV.ID), summarise, PSA=mean(PSA, na.rm=T))
+PSA = dcast(PSA, DayOfImaging ~ NSFTV.ID, value.var="PSA") #9 x 361
+
+PSA$DayOfImaging=NULL
+````
+
+###Defining the exponential growth model
+We will model PSA over the nine time points using the exponential function $PSA = M_o e^{rt}$. Here, $M_o$ is the biomass on the first day of imaging, $t$ is time, and $r$ is a parameter that influences growth rate. Here we will just define the formula we will use to fit exponential growth model with nonlinear least squares using the `nlsLM` function in the package `minpack.lm`.
+
+```{r define exp function, eval=F, echo = T}
+fmla.exp = Y ~ M0*exp(r*Day)
+```
+
+###The fitting function
+This next function does all the heavy lifting. I'll provide a breif summary of what the function does. See the comments in the code for a line-by-line explaination of what its actually doing. The 'nlsLM' function fits the exponential function defined by 'fmla.exp' and estimates the model parameters using an iterative method that minimizes the sum of squares of errors between the observed data and the model's predictions. The model parameters are updated with each iteration until optimal values are obtained. For this to work, we need to supply reasonable starting values. Here the goal is to obtain the "best" estimates for $M_o$ and $r$ for each accession, so for each accession we will need to find some good staring values. For $M_o$, this is easy. $M_o$ is the starting biomass, so we can just find the minimum value of PSA for each accession. For $r$, finding good starting values requires a little more work....
+
+```{r fitting the model, eval=F, echo = T}
+fit.exp <- function(x){
+  #For each column of PSA, we will make a new dataframe that has a column called Day and one called Y. Y is the PSA
+  tmp.df = data.frame(Day = 1:9,
+                      Y = x)
+  #Here is where we find a good starting value for our model parameter r. If we log tranform PSA, we can fit a linear model and the slope will be a great starting value for r. The line below pull out the slope with coef()[2]
+  r.int = coef(lm(log(Y) ~ Day, tmp.df))[2]
+  #Find a starting value for Mo
+  M0.int = min(tmp.df$Y)
+  
+  #Here is where we fit the non-linear model. With the nlsLM function you can constrain parameters using the lower and upper arguments. 
+  mod.nlsLM = nlsLM(fmla.exp,
+                    start=list(M0=M0.int, r=r.int),
+                    data = tmp.df, 
+                    control = nls.lm.control(maxiter = 1000), 
+                    lower = c(0, 0),
+                    upper = c(50000, Inf))
+  #Obtain the parameter estimates
+  Res = coefficients(mod.nlsLM)
+  return(Res)
+}
+```
+
+###Modeling the mean growth curve
+```{r eval=F, echo = T}
+pop.exp=fit.exp(PSA.pop.mn$PSA)
+pop.exp
+```
+
+```{r eval = F, echo = T}
+plot(1:9, PSA.pop.mn$PSA, ylab="PSA (pixels)", xlab="Day of Imaging")
+lines(1:9, pop.exp[1]*exp(pop.exp[2]*(1:9)), col="red", lty=2)
+```
+
+###Applying the fitting function for each accession
+Now we'll apply the function described above to each column of PSA. Remember each column is a different accession.
+```{r apply, eval=F, echo = T}
+PSA.exp=apply(PSA, 2, fit.exp)
+PSA.exp=data.frame(NSFTV.ID=colnames(PSA.exp), M0=PSA.exp[1,], r = PSA.exp[2,])
+dim(PSA.exp) #361 x 3
+```
+
+#GWAS for model parameters
+These model parameters can be thougth of as dervied traits that describe some aspect of the longitudinal phenotype. Recall the exponential function, $PSA = M_o e^{rt}$, has parameters $M_o$ and $r$ which describe the initial biomass and the growth rate, respectively. If we are interested in finding out which genes influence seedling shoot biomass, we can run a GWAS on the model parameter $M_o$. Here, we'll use the code from the Genomics I exercise (this code is copied directly from the exercise) to find SNPs that may influence the shoot biomass of the seedlings ($M_o$) and the shoot growth rate ($r$).
+
+###Genotypic data
+The genotype data set is provided in the PLINK format. We will use the `read_ped` function from the `BGLR` package to read the PLINK format files into the R environment. 
+```{r eval=FALSE, echo=T}
+# install.packages("BGLR")
+library(BGLR)
+out<- read_ped("RiceDiversity_44K_Genotypes_PLINK/sativas413.ped")
+p=out$p
+n=out$n
+out=out$x
+#Recode snp to 0,1,2 format using allele 1
+# 0 --> 0
+# 1 --> 1
+# 2 --> NA
+# 3 --> 2
+out[out==2]=NA
+out[out==3]=2
+W <- matrix(out, nrow=p, ncol=n, byrow=TRUE)
+W <- t(W) 
+dim(W) # # 413 x 36901
+```
+
+###Accession IDs 
+The accession IDs (individual IDs) are included in `.fam` file. 
+```{r eval=FALSE}
+# accession ID
+fam <-read.table("RiceDiversity_44K_Genotypes_PLINK/sativas413.fam", header = FALSE, stringsAsFactors = FALSE)  
+head(fam)
+rownames(W) <- paste0("NSFTV_", fam$V2) # 413 x 36901
+```
+
+###Subset the marker matrix
+```{r, eval=FALSE, echo=T}
+PSA.exp <- PSA.exp[match(rownames(W), PSA.exp$NSFTV.ID),] 
+na.index <- is.na(PSA.exp$NSFTV.ID)
+PSA.exp <- PSA.exp[!na.index,] # 361 x 3
+W <- W[!na.index,] # 361 x 36901
+dim(W)
+dim(PSA.exp)
+table(rownames(W) == PSA.exp$NSFTV.ID)
+head(rownames(W))
+head(PSA.exp$NSFTV.ID)
+```
+
+### Genotype imputation
+Replace missing marker genotypes with the mean values.
+```{r eval=FALSE,  echo=T}
+for (j in 1:ncol(W)){
+  W[,j] <- ifelse(is.na(W[,j]), mean(W[,j], na.rm=TRUE), W[,j])
+}
+```
+
+### Quality control
+Perform a quality control analysis by removing markers with MAF < 0.05. How many markers are removed? 
+```{r eval = FALSE}
+p <- colSums(W) / (2*nrow(W)) # or colMean(X) / 2
+maf <- ifelse(p > 0.5, 1-p, p)
+maf.index <- which(maf < 0.05)
+p2 <- p[maf.index]
+W2 <- W[, -maf.index]  # 361 x 33656 
+```
+
+##GWAS for $M_o$
+Fit a single-marker-based linear mixed model  by using the `GWAS` function in the [rrBLUP](https://cran.r-project.org/web/packages/rrBLUP/index.html) R package. Report the -log10 of p-values for SNP effects. 
+```{r eval=FALSE, echo=T}
+# install.packages("rrBLUP")
+library(rrBLUP)
+map <- read.table("RiceDiversity_44K_Genotypes_PLINK/sativas413.map", header = FALSE, stringsAsFactors = FALSE)
+my.geno <- data.frame(marker=map[,2], chrom=map[,1], pos=map[,4], t(W-1), check.names = FALSE) # W = \in{-1, 0, 1}
+my.pheno <- data.frame(NSFTV_ID=PSA.exp$NSFTV.ID, y=PSA.exp$M0) # Day 7
+
+rel_M0 <- GWAS(my.pheno, my.geno, min.MAF=0.05, P3D=TRUE, plot=FALSE)
+head(rel_M0)
+tail(rel_M0)
+```
+
+
+###Manhattan plot for $M_0$
+```{r eval=FALSE, echo=T}
+# install.packages("qqman")
+library(qqman)
+manhattan(x = rel_M0, chr = "chrom", bp = "pos", p = "y", snp = "marker", col = c("blue4", "orange3"), logp = FALSE)
+```
+##GWAS for $r$
+Fit a single-marker-based linear mixed model  by using the `GWAS` function in the [rrBLUP](https://cran.r-project.org/web/packages/rrBLUP/index.html) R package. Report the -log10 of p-values for SNP effects. 
+```{r eval=FALSE, echo=T}
+my.pheno <- data.frame(NSFTV_ID=PSA.exp$NSFTV.ID, y=PSA.exp$r) # Day 7
+
+rel_r <- GWAS(my.pheno, my.geno, min.MAF=0.05, P3D=TRUE, plot=FALSE)
+head(rel_r)
+tail(rel_r)
+```
+
+
+###Manhattan plot for $r$
+```{r eval=FALSE, echo=T}
+manhattan(x = rel_r, chr = "chrom", bp = "pos", p = "y", snp = "marker", col = c("blue4", "orange3"), logp = FALSE)
+```
+
+
+#Genomic prediction for model parameters
+If we are interested in selecting lines that may be the best to improve  growth rate or early vigor, we apply the rrBLUP approach we covered in Genomics II to predict the genetic values for $r$ for each accession. Here, we'll use the code from the Genomics II (this code is copied directly from the exercise) exercise to for $M_o$ and $r$.
+
+###Compute the genomic relationship matrix (GRM)
+Compute the first genomic relationship matrix, `G`, of VanRaden (2008)  using the entire markers. 
+```{r eval=FALSE, echo=T}
+W3 <- scale(W2, center=TRUE, scale = FALSE)
+G <- tcrossprod(W3) / ( 2*sum( p2*(1-p2)) )
+```
+
+##Genomic prediction for $M_o$
+An example of 3 fold cross-validation with 3 replicates for $M_o$ 
+```{r eval=FALSE, echo=T}
+# install.packages("rrBLUP")
+library(rrBLUP)
+
+y <- PSA.exp$M0
+
+r2 <- array()
+for (i in 1:3){
+  fold <- 3
+  partition <- sample(1:fold, size=nrow(G), replace = TRUE)
+  r1 <- array()
+  for (j in 1:fold){
+    y.na <- y
+    tst <- which(partition == j)
+    y.na[tst] <- NA
+    fit <- mixed.solve(y=y.na, K=G)
+    r1[j] <- cor(y[tst], fit$u[tst])
+  }
+  r2[i] <- mean(r1)
+}
+mean(r2) 
+```
+
+##Genomic prediction for $r$
+An example of 3 fold cross-validation with 3 replicates for $r$ 
+```{r eval=FALSE, echo=TRUE}
+# install.packages("rrBLUP")
+library(rrBLUP)
+
+y <- PSA.exp$r
+
+r2 <- array()
+for (i in 1:3){
+  fold <- 3
+  partition <- sample(1:fold, size=nrow(G), replace = TRUE)
+  r1 <- array()
+  for (j in 1:fold){
+    y.na <- y
+    tst <- which(partition == j)
+    y.na[tst] <- NA
+    fit <- mixed.solve(y=y.na, K=G)
+    r1[j] <- cor(y[tst], fit$u[tst])
+  }
+  r2[i] <- mean(r1)
+}
+mean(r2) 
+```
+
+##Selecting the lines with the fastest growth rate
+```{r eval=F, echo=T}
+#Find top and bottom 3 for r
+top3=fit$u[order(fit$u, decreasing = T)[1:3] ]
+bottom3=fit$u[order(fit$u, decreasing = T)[359:361] ]
+
+#Get their PSA values
+PSA.sub=PSA[, colnames(PSA) %in% c(names(top3), names(bottom3)) ]
+```
+
+```{r eval=F, echo=T}
+#Color palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+for (i in 1:ncol(PSA.sub)){
+  if(i == 1){
+    plot(1:9, PSA.sub[,i], ylim = c(min(PSA.sub), max(PSA.sub)), type="l", col=cbPalette[i], ylab="PSA (pixels)", xlab="Day of Imaging")
+  }else{
+    lines(1:9, PSA.sub[,i], col=cbPalette[i])
+  }
+}
+
+legend("topleft", names(PSA.sub), lty=1, col=cbPalette[1:6])
+```
