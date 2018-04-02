@@ -386,7 +386,7 @@ The OLS estimator for the full mdoel is
       \mathbf{w}'_1\mathbf{y} \\
       \mathbf{w}'_2\mathbf{y} \\
     \end{bmatrix} \\
-    \mathbf{a} &amp;= (\mathbf{W'W})^{-1}\mathbf{W}'\mathbf{y}
+    \hat{\mathbf{a}} &amp;= (\mathbf{W'W})^{-1}\mathbf{W}'\mathbf{y}
 \end{align*}`
 
 
@@ -517,6 +517,17 @@ Alternatively,
 \mathbf{g} &amp;\sim N(0, \mathbf{G}_{-k}\sigma^2_{g_{-k}})
 \end{align*}`
 where `\(-k\)` denotes the `\(k\)`th chromosome removed
+
+
+---
+# Important literature
+Animal 
+
+* [Kennedy et al. 1992.](https://doi.org/10.2527/1992.7072000x) Estimation of effects of single genes on quantitative traits. J Anim Sci. 70:2000-2012.
+
+Plant 
+
+* [Yu et al. 2006.](https://dx.doi.org/10.1038/ng1702) A unified mixed-model method for association mapping that accounts for multiple levels of relatedness. Nat Genet. 38:203-208.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
