@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multi-omic quantitative genetic analysis</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Gota Morota" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multi-omic quantitative genetic analysis
+## STAT 892-004 Integrative Data Science for Plant Phenomics
+### Gota Morota
+### 2018/04/12
+
+---
+
+
+
+
+
+
+class: inverse, center, middle
+
+# Single omic analysis
+
+
+---
+# Ridge regression BLUP (RRBLUP)
+
+`\begin{align*}
+\mathbf{y} &amp;= \mathbf{W}\mathbf{a} + \boldsymbol{\epsilon} \\
+\underbrace{\begin{bmatrix}    
+y_1\\
+y_2\\
+\vdots \\
+y_n\end{bmatrix}}_{n \times 1}  
+&amp;= \underbrace{\begin{bmatrix}
+   w_{11} &amp; w_{12} &amp; \cdots &amp; w_{1m} \\
+    w_{21} &amp; w_{22} &amp; \cdots &amp; w_{2m} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    w_{n1} &amp; w_{n2} &amp; \cdots &amp; w_{nm}
+\end{bmatrix}}_{n \times m} \quad
+\underbrace{\begin{bmatrix}
+a_1\\
+a_2\\
+\vdots \\
+a_m\end{bmatrix}}_{m \times 1} 
++\underbrace{\begin{bmatrix}
+\epsilon_1\\
+\epsilon_2\\
+\vdots \\
+\epsilon_m\end{bmatrix}}_{n \times 1} 
+\end{align*}`
+
+where `\(\mathbf{W}\)` is a normalized matrix of omics (e.g., genomics, transcriptomics, metabolomics),  `\(n\)` is the number of individuals (e.g., accessions) and `\(m\)` is the number of omic information. 
+
+`\begin{align*}
+\mathbf{a} &amp;\sim N(0, \mathbf{I} \sigma^2_a) \\
+\boldsymbol{\epsilon} &amp;\sim N(0, \mathbf{I} \sigma^2_e) \\
+\end{align*}`
+
+Note that the `\(\mathbf{W}\)` matrix can be divided into two parts (inbred parent A and inbred parent B) for hybrid prediction
+
+
+
+
+---
+# Best linear unbiased prediction
+
+`\begin{align*}
+\mathbf{y} &amp;= \mathbf{h} + \boldsymbol{\epsilon} \\
+\mathbf{h} &amp;\sim N(0, \mathbf{K}\sigma^2_h)
+\end{align*}`
+The choice of variance-covariance structure `\(\mathbf{K}\)` derived from omic data sources (e.g., genomics, transcriptomics, metabolomics)
+
+- Cross-product: `\(\mathbf{h} \sim N(0, \mathbf{WW}'/m \sigma^2_h)\)`
+
+- Euclidean distance: `\(\mathbf{h} \sim N(0, \mathbf{GK} \sigma^2_h)\)`
+
+- For transcriptomics ([Frisch et al. 2010](https://doi.org/10.1007/s00122-009-1204-1))
+    - `\(\mathbf{h} \sim N(0, \mathbf{D}_B \sigma^2_h)\)`, where `\(\mathbf{D}_B(i,j) = \sqrt{\frac{n_s(i,j)}{n_g}}\)`
+
+
+
+
+---
+# Genomics vs. Metabolomics 
+
+[Riedelsheimer et al. 2012.](https://dx.doi.org/10.1038/ng.1033)
+
+- biomass- and bioenergy-related traits in hybrid maize
+
+- 38,019 SNPs
+
+- 130 metabolites
+
+- RRBLUP
+
+- Genomic `\(r\)` = 0.72 ~ 0.81 (avg=0.53)
+
+- Metabolic `\(r\)` = 0.60 ~ 0.80 (avg=0.32)
+
+--
+
+Metabolites -&gt; lower prediction accuracy than using SNP markers
+
+
+
+
+---
+# Genomics vs. Transcriptomics
+
+[Zenke-Philippi et al. 2016.](https://doi.org/10.1186/s12864-016-2580-y)
+
+- 970 AFLP markers
+
+- 10,000 mRNA
+
+- RRBLUP
+
+--
+
+No difference in prediction accuracy 
+
+
+---
+# Genomics vs. Transcriptomics
+
+[Zenke-Philippi et al. 2017.](https://doi.org/10.1111/pbr.12482)
+
+- grain yield and grain dry matter content of 254 maize hybrids 
+
+- 970 AFLP markers
+
+- 2,000 mRNA transcripts
+
+- RRBLUP and transcriptome-based distances 
+
+--
+
+Comparable prediction accuracy 
+
+
+
+
+
+---
+# Genomics vs. Metabolomics vs. Transcriptomics
+
+[Xu et al. 2016.](https://doi.org/10.1111/tpj.13242 )
+
+- Metabolomics ( `\(m\)` = 1,000)
+- Transcriptomics ( `\(m\)` = 24,994)
+- Genomics ( `\(m\)` = 1,619)
+- least absolute shrinkage and selection operator (LASSO)
+- best linear unbiased prediction (BLUP) 
+- stochastic search variable selection 
+- partial least squares
+- support vector machines with the radial basis function
+- polynomial kernel function
+
+--
+
+Results depend on traits 
+
+
+
+
+
+
+
+
+
+
+
+---
+class: inverse, center, middle
+
+# Multi layer omic analysis
+
+
+
+---
+# Models
+**Ridge regression BLUP**
+`\begin{align*}
+\mathbf{y} &amp;= \mathbf{W}_{g}\mathbf{a}_{g} + \mathbf{W}_{t}\mathbf{a}_{t} + \mathbf{W}_{m}\mathbf{a}_{m} + \boldsymbol{\epsilon} \\
+\end{align*}`
+The variance covariance structures are 
+`\begin{align*}
+\mathbf{a}_g &amp;\sim N(0, \mathbf{I} \sigma^2_{a_{g}}) \\
+\mathbf{a}_t &amp;\sim N(0, \mathbf{I} \sigma^2_{a_{t}}) \\
+\mathbf{a}_m &amp;\sim N(0, \mathbf{I} \sigma^2_{a_{m}}) \\
+\boldsymbol{\epsilon} &amp;\sim N(0, \mathbf{I} \sigma^2_e) 
+\end{align*}`
+
+**Best linear unbiased prediction**
+
+`\begin{align*}
+\mathbf{y} &amp;= \mathbf{h}_g + \mathbf{h}_t + \mathbf{h}_m + \boldsymbol{\epsilon} \\
+\end{align*}`
+The variance covariance structures based on cross-products are
+`\begin{align*}
+\mathbf{h}_g &amp; \sim N(0, \mathbf{W_gW_g}'/m_g \sigma^2_{h_{g}}) \\
+\mathbf{h}_t &amp; \sim N(0, \mathbf{W_tW_t}'/m_t \sigma^2_{h_{t}}) \\
+\mathbf{h}_m &amp; \sim N(0, \mathbf{W_tW_t}'/m_m \sigma^2_{h_{m}})
+\end{align*}`
+
+---
+# Genomics &amp; Metabolomics  
+
+- [Riedelsheimer et al. 2012.](https://dx.doi.org/10.1038/ng.1033)
+   - no gain in prediction accuracy when using genomics + metabolomics
+
+
+
+---
+# Genomics &amp; Transcriptomics 
+
+- [Zenke-Philippi et al. 2016.](https://doi.org/10.1186/s12864-016-2580-y)
+   - No gain in prediction accuracy 
+
+
+---
+# Genomics &amp; Transcriptomics &amp; Metabolomics
+
+- [Xu et al. 2016.](https://doi.org/10.1111/tpj.13242 )
+   - rarely outperformed the best single data prediction
+
+- [Westhues et al. 2017.](https://dx.doi.org/10.1007/s00122-017-2934-0)
+   - marginal gains
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
